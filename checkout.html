@@ -1,0 +1,2026 @@
+<!DOCTYPE html>
+<html lang="pt-BR" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a1a1a">
+  <title>Checkout — BELLARIO</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Payment -->
+  <script src="https://js.pagou.ai/payments/v3.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-bg:        #ffffff;
+      --color-bg-subtle: #f7f5f3;
+      --color-fg:        #1a1a1a;
+      --color-fg-muted:  #5c5753;
+      --color-fg-subtle: #9c9793;
+      --color-border:    #e8e3de;
+      --color-green:     #1a7a3c;
+      --color-green-bg:  #f0faf4;
+      --color-green-border: #b2dfc4;
+      --font: 'Jost', sans-serif;
+      --radius: 8px;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--color-bg-subtle);
+      color: var(--color-fg);
+      font-size: .9375rem;
+      min-height: 100vh;
+    }
+
+    /* ── Top Banner ─────────────────────────────────────────── */
+    .ck-banner {
+      background: var(--color-fg);
+      color: #fff;
+      text-align: center;
+      font-size: .75rem;
+      letter-spacing: .06em;
+      padding: .55rem 1rem;
+    }
+
+    /* ── Header ─────────────────────────────────────────────── */
+    .ck-header {
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: .9rem 1.25rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .ck-header__logo {
+      grid-column: 2;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--color-fg);
+    }
+    .ck-header__logo svg {
+      height: 38px;
+      width: auto;
+    }
+    .ck-header__cart {
+      grid-column: 3;
+      justify-self: end;
+      color: var(--color-fg-muted);
+      display: flex;
+      align-items: center;
+    }
+    .ck-header__cart-count {
+      background: var(--color-fg);
+      color: #fff;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: .625rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Wrapper ─────────────────────────────────────────────── */
+    .ck-wrap {
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 3rem;
+    }
+
+    /* ── Card ────────────────────────────────────────────────── */
+    .ck-card {
+      background: var(--color-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+      margin-bottom: .75rem;
+    }
+
+    /* ── Resume ─────────────────────────────────────────────── */
+    .ck-resume__toggle {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .875rem 1.1rem;
+      font-family: var(--font);
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--color-fg);
+    }
+    .ck-resume__toggle-left {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .ck-resume__toggle-right {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      color: var(--color-fg);
+    }
+    .ck-resume__total {
+      font-size: .9375rem;
+      font-weight: 700;
+    }
+    .ck-resume__chevron {
+      transition: transform .25s;
+    }
+    .ck-resume__chevron.is-open {
+      transform: rotate(180deg);
+    }
+
+    .ck-resume__coupon {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .5rem 1.1rem .6rem;
+      font-size: .75rem;
+      color: var(--color-fg-subtle);
+      cursor: pointer;
+      width: fit-content;
+    }
+    .ck-resume__coupon:hover { color: var(--color-fg-muted); }
+    .ck-resume__coupon-wrap {
+      border-top: 1px solid var(--color-border);
+      padding: .5rem 0 0;
+    }
+
+    .ck-resume__progress {
+      padding: .75rem 1.1rem .875rem;
+      border-top: 1px solid var(--color-border);
+    }
+    .ck-resume__progress-msg {
+      font-size: .75rem;
+      color: var(--color-fg-muted);
+      margin-bottom: .4rem;
+    }
+    .ck-resume__progress-msg strong { color: var(--color-fg); font-weight: 600; }
+    .ck-resume__track {
+      height: 4px;
+      background: var(--color-border);
+      border-radius: 2px;
+      position: relative;
+    }
+    .ck-resume__fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      background: var(--color-green);
+      border-radius: 2px;
+      transition: width .4s ease;
+    }
+
+    /* Resume body (items) */
+    .ck-resume__body {
+      display: none;
+      border-top: 1px solid var(--color-border);
+    }
+    .ck-resume__body.is-open { display: block; }
+    .ck-resume__item {
+      display: flex;
+      gap: .75rem;
+      padding: .875rem 1.1rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .ck-resume__item:last-child { border-bottom: none; }
+    .ck-resume__item-img {
+      width: 56px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 4px;
+      flex-shrink: 0;
+      background: var(--color-bg-subtle);
+    }
+    .ck-resume__item-info { flex: 1; }
+    .ck-resume__item-name {
+      font-size: .8125rem;
+      font-weight: 600;
+      line-height: 1.35;
+      margin-bottom: .2rem;
+    }
+    .ck-resume__item-variant {
+      font-size: .6875rem;
+      color: var(--color-fg-muted);
+    }
+    .ck-resume__item-price {
+      font-size: .875rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* ── Step header ─────────────────────────────────────────── */
+    .ck-step-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .875rem 1.1rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .ck-step-header h2 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .ck-step-header__meta {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      font-size: .8125rem;
+      color: var(--color-fg-muted);
+    }
+    .ck-step-header__back {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font);
+      font-size: .8125rem;
+      color: var(--color-fg-muted);
+      text-decoration: underline;
+    }
+    .ck-step-header__back:hover { color: var(--color-fg); }
+
+    /* ── Form ────────────────────────────────────────────────── */
+    .ck-form { padding: 1.1rem; display: flex; flex-direction: column; gap: .75rem; }
+
+    .ck-field {
+      position: relative;
+    }
+    .ck-field input {
+      width: 100%;
+      padding: 20px 14px 4px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: .9375rem;
+      color: var(--color-fg);
+      background: var(--color-bg);
+      outline: none;
+      transition: border-color .15s;
+      height: 52px;
+    }
+    .ck-field input:focus { border-color: var(--color-fg); }
+    .ck-field input.has-value + label,
+    .ck-field input:focus + label {
+      top: 7px;
+      transform: none;
+      font-size: .6875rem;
+      color: var(--color-fg-muted);
+    }
+    .ck-field label {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: .9375rem;
+      color: var(--color-fg-subtle);
+      pointer-events: none;
+      transition: top .15s, transform .15s, font-size .15s, color .15s;
+    }
+
+    .ck-row { display: flex; gap: .75rem; }
+    .ck-row .ck-field { flex: 1; }
+
+    #addressFields { flex-direction: column; gap: .75rem; }
+
+    /* CEP row */
+    .ck-cep-row {
+      display: flex;
+      gap: .75rem;
+      align-items: flex-start;
+    }
+    .ck-cep-row .ck-field { flex: 0 0 160px; }
+    .ck-cep-city {
+      flex: 1;
+      padding: .875rem;
+      font-size: .9375rem;
+      color: var(--color-fg-muted);
+      display: flex;
+      align-items: center;
+      min-height: 52px;
+    }
+
+    /* ── PIX badge ───────────────────────────────────────────── */
+    .ck-pix-badge {
+      background: var(--color-green-bg);
+      border: 1px solid var(--color-green-border);
+      border-radius: var(--radius);
+      padding: .75rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: .625rem;
+      font-size: .8125rem;
+      color: var(--color-green);
+    }
+    .ck-pix-badge strong { font-weight: 600; }
+
+    /* ── Button ──────────────────────────────────────────────── */
+    .ck-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: .9rem 1rem;
+      background: var(--color-fg);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: .9375rem;
+      font-weight: 600;
+      letter-spacing: .05em;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+    .ck-btn:hover { opacity: .85; }
+    .ck-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    .ck-privacy {
+      text-align: center;
+      font-size: .6875rem;
+      color: var(--color-fg-muted);
+      margin-top: .5rem;
+      line-height: 1.5;
+    }
+    .ck-privacy a { color: var(--color-fg); }
+
+    /* ── Address card ────────────────────────────────────────── */
+    .ck-addr-list { padding: .75rem 1.1rem .75rem; display: flex; flex-direction: column; gap: .5rem; }
+
+    .ck-addr-option {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: .75rem .875rem;
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      cursor: pointer;
+      transition: border-color .15s;
+    }
+    .ck-addr-option.is-selected { border-color: var(--color-fg); }
+    .ck-addr-option input[type="radio"] { margin-top: 3px; accent-color: var(--color-fg); flex-shrink: 0; }
+    .ck-addr-option__info { flex: 1; font-size: .8125rem; line-height: 1.5; }
+    .ck-addr-option__actions {
+      display: flex;
+      gap: .5rem;
+      font-size: .75rem;
+      color: var(--color-fg-muted);
+    }
+    .ck-addr-option__actions button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font);
+      font-size: .75rem;
+      color: var(--color-fg-muted);
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+    }
+    .ck-addr-option__actions button:hover { color: var(--color-fg); }
+
+    /* ── Shipping options ────────────────────────────────────── */
+    .ck-ship-title {
+      padding: .75rem 1.1rem .5rem;
+      font-size: .8125rem;
+      color: var(--color-fg-muted);
+    }
+    .ck-ship-list { padding: 0 1.1rem .875rem; display: flex; flex-direction: column; gap: .5rem; }
+    .ck-ship-option {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: .75rem .875rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      cursor: pointer;
+      transition: border-color .15s;
+    }
+    .ck-ship-option.is-selected { border-color: var(--color-fg); }
+    .ck-ship-option input[type="radio"] { accent-color: var(--color-fg); flex-shrink: 0; }
+    .ck-ship-option__info { flex: 1; }
+    .ck-ship-option__name { font-size: .8125rem; font-weight: 500; }
+    .ck-ship-option__eta { font-size: .75rem; color: var(--color-fg-muted); }
+    .ck-ship-option__price { font-size: .875rem; font-weight: 600; }
+
+    .ck-legal {
+      font-size: .6875rem;
+      color: var(--color-fg-muted);
+      line-height: 1.55;
+      padding: .75rem 1.1rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* ── Loading spinner ─────────────────────────────────────── */
+    .ck-cep-spinner {
+      display: none;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--color-border);
+      border-top-color: var(--color-fg);
+      border-radius: 50%;
+      animation: spin .6s linear infinite;
+      margin-left: .5rem;
+    }
+    .ck-cep-spinner.is-visible { display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Steps ──────────────────────────────────────────────── */
+    .ck-step { display: none; }
+    .ck-step.is-active { display: block; }
+    .ck-step.is-entering {
+      animation: stepIn .38s cubic-bezier(.22,.68,0,1.2) both;
+    }
+    @keyframes stepIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    /* ── Button loading state ────────────────────────────────── */
+    .ck-btn--loading {
+      pointer-events: none;
+      opacity: .85;
+      position: relative;
+      color: transparent !important;
+    }
+    .ck-btn--loading::after {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,.35);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .65s linear infinite;
+    }
+
+    /* ── CEP field loading state ─────────────────────────────── */
+    .ck-field--loading input {
+      border-color: var(--color-fg-muted) !important;
+      background: var(--color-bg-subtle);
+    }
+    .ck-cep-city--skeleton {
+      background: linear-gradient(90deg, var(--color-border) 25%, #ede8e3 50%, var(--color-border) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.2s infinite;
+      border-radius: 4px;
+      height: 14px;
+      width: 100px;
+      display: inline-block;
+    }
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* ── Address fields enter animation ─────────────────────── */
+    #addressFields.is-entering > * {
+      animation: fieldIn .32s cubic-bezier(.22,.68,0,1.1) both;
+    }
+    #addressFields.is-entering > *:nth-child(1) { animation-delay: 0ms;   }
+    #addressFields.is-entering > *:nth-child(2) { animation-delay: 55ms;  }
+    #addressFields.is-entering > *:nth-child(3) { animation-delay: 110ms; }
+    #addressFields.is-entering > *:nth-child(4) { animation-delay: 165ms; }
+    #addressFields.is-entering > *:nth-child(5) { animation-delay: 210ms; }
+    @keyframes fieldIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Payment ─────────────────────────────────────────────── */
+    .ck-payment-processor {
+      padding: .65rem 1.1rem;
+      font-size: .75rem;
+      color: var(--color-fg-muted);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .ck-payment-processor__logo img {
+      height: 22px;
+      width: auto;
+    }
+
+    .ck-pay-options { display: flex; flex-direction: column; gap: 0; }
+
+    .ck-pay-option {
+      border-bottom: 1px solid var(--color-border);
+      cursor: pointer;
+    }
+    .ck-pay-option:last-child { border-bottom: none; }
+
+    .ck-pay-option__header {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      column-gap: .625rem;
+      row-gap: .3rem;
+      padding: .875rem 1.1rem;
+      align-items: center;
+    }
+    .ck-pay-option__header input[type="radio"] {
+      accent-color: var(--color-fg);
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      align-self: center;
+    }
+    .ck-pay-option__label {
+      font-size: .9375rem;
+      font-weight: 500;
+      align-self: center;
+    }
+    /* Brands row spans both columns, sits below label */
+    .ck-brands {
+      grid-column: 2;
+    }
+    /* PIX row: radio + icon + label + badge all on one line */
+    .ck-pay-option--pix .ck-pay-option__header {
+      display: flex;
+      align-items: center;
+      gap: .625rem;
+    }
+
+    /* Card brand icons */
+    .ck-brands {
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+      flex-wrap: wrap;
+      grid-column: 2;
+    }
+    .ck-brand {
+      height: 22px;
+      width: auto;
+      max-width: 34px;
+      object-fit: contain;
+      border-radius: 3px;
+      border: 1px solid var(--color-border);
+      padding: 1px 2px;
+      background: #fff;
+    }
+
+    /* PIX badge */
+    .ck-pay-badge {
+      background: var(--color-green);
+      color: #fff;
+      font-size: .625rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      padding: .2rem .45rem;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    /* PIX icon */
+    .ck-pix-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    /* Expanded content */
+    .ck-pay-content {
+      display: none;
+      padding: 0 1.1rem 1.1rem;
+    }
+    .ck-pay-content.is-open { display: block; }
+
+    /* Card preview */
+    .ck-card-preview {
+      background: linear-gradient(135deg, #b8b8b8 0%, #d4d4d4 100%);
+      border-radius: 10px;
+      padding: 1.1rem 1.25rem .9rem;
+      margin-bottom: .875rem;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .ck-card-preview__chip {
+      width: 28px;
+      height: 20px;
+      background: linear-gradient(135deg, #e8d5a0, #c9a84c);
+      border-radius: 3px;
+      margin-bottom: .5rem;
+    }
+    .ck-card-preview__number {
+      font-size: .875rem;
+      letter-spacing: .18em;
+      color: rgba(0,0,0,.5);
+      font-family: 'Courier New', monospace;
+      margin-bottom: .5rem;
+    }
+    .ck-card-preview__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .ck-card-preview__name {
+      font-size: .65rem;
+      letter-spacing: .1em;
+      color: rgba(0,0,0,.45);
+      text-transform: uppercase;
+    }
+    .ck-card-preview__expiry {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    .ck-card-preview__expiry-label {
+      font-size: .45rem;
+      letter-spacing: .1em;
+      color: rgba(0,0,0,.35);
+      margin-bottom: .1rem;
+    }
+    .ck-card-preview__expiry-value {
+      font-size: .65rem;
+      letter-spacing: .1em;
+      color: rgba(0,0,0,.45);
+      font-family: 'Courier New', monospace;
+    }
+
+    /* Card form fields */
+    .ck-card-form { display: flex; flex-direction: column; gap: .625rem; }
+
+    .ck-plain-field {
+      position: relative;
+    }
+    .ck-plain-field input,
+    .ck-plain-field select {
+      width: 100%;
+      padding: .8rem .875rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: .9375rem;
+      color: var(--color-fg);
+      background: var(--color-bg);
+      outline: none;
+      height: 48px;
+      transition: border-color .15s;
+      appearance: none;
+    }
+    .ck-plain-field input::placeholder { color: var(--color-fg-subtle); font-size: .875rem; }
+    .ck-plain-field input:focus,
+    .ck-plain-field select:focus { border-color: var(--color-fg); }
+    .ck-plain-field select { cursor: pointer; padding-right: 2rem; }
+    .ck-plain-field__chevron {
+      position: absolute;
+      right: .75rem;
+      top: 0;
+      bottom: 0;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      pointer-events: none;
+      color: var(--color-fg-muted);
+    }
+    .ck-installment-hint {
+      font-size: .6875rem;
+      color: var(--color-fg-muted);
+      margin-top: -.2rem;
+    }
+
+    /* PIX info */
+    .ck-pix-desc {
+      font-size: .875rem;
+      color: var(--color-fg-muted);
+      line-height: 1.55;
+      margin-bottom: .75rem;
+    }
+    .ck-pix-value {
+      font-size: .9375rem;
+      font-weight: 600;
+      color: var(--color-green);
+      margin-bottom: .875rem;
+    }
+
+    /* ── PIX payment screen ──────────────────────────────────── */
+    .pix-screen {
+      display: none;
+      flex-direction: column;
+      padding: 0;
+    }
+    .pix-screen.is-visible { display: flex; }
+
+    .pix-screen__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .875rem 1.1rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .pix-screen__title { font-size: 1rem; font-weight: 600; }
+
+    .pix-timer-bar {
+      background: var(--color-bg-subtle);
+      border-bottom: 1px solid var(--color-border);
+      padding: .625rem 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: .8125rem;
+      color: var(--color-fg-muted);
+    }
+    .pix-timer-bar__label { display: flex; align-items: center; gap: .4rem; }
+    .pix-timer-bar__dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--color-green);
+      animation: timerPulse 1.4s ease infinite;
+    }
+    @keyframes timerPulse {
+      0%,100% { opacity:1; }
+      50%      { opacity:.3; }
+    }
+    .pix-timer-bar__time {
+      font-size: .9375rem;
+      font-weight: 700;
+      color: var(--color-fg);
+      font-variant-numeric: tabular-nums;
+    }
+    .pix-timer-bar__time.is-urgent { color: #c60c0c; }
+
+    .pix-body {
+      padding: 1.25rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.1rem;
+    }
+
+    .pix-amount-block {
+      text-align: center;
+    }
+    .pix-amount-label {
+      font-size: .6875rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--color-fg-muted);
+      margin-bottom: .2rem;
+    }
+    .pix-amount-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-fg);
+    }
+    .pix-amount-discount {
+      font-size: .75rem;
+      color: var(--color-green);
+      margin-top: .15rem;
+    }
+
+    .pix-qr-wrap {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: .875rem;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .625rem;
+      width: 100%;
+      max-width: 260px;
+    }
+    .pix-qr-wrap img {
+      display: block;
+      width: 200px;
+      height: 200px;
+      image-rendering: pixelated;
+    }
+    .pix-qr-brand {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .6875rem;
+      color: var(--color-fg-muted);
+      letter-spacing: .04em;
+    }
+    .pix-qr-brand img { height: 14px; width: auto; }
+
+    .pix-divider {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      color: var(--color-fg-subtle);
+      font-size: .6875rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .pix-divider::before,
+    .pix-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--color-border);
+    }
+
+    .pix-copy-block {
+      width: 100%;
+    }
+    .pix-copy-label {
+      font-size: .6875rem;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      color: var(--color-fg-muted);
+      margin-bottom: .4rem;
+    }
+    .pix-copy-field {
+      display: flex;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .pix-copy-field input {
+      flex: 1;
+      padding: .7rem .875rem;
+      border: none;
+      font-family: 'Courier New', monospace;
+      font-size: .625rem;
+      color: var(--color-fg-muted);
+      background: var(--color-bg-subtle);
+      outline: none;
+      min-width: 0;
+      cursor: text;
+    }
+    .pix-copy-btn {
+      padding: .7rem 1rem;
+      background: var(--color-fg);
+      color: #fff;
+      border: none;
+      font-family: var(--font);
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      transition: background .15s;
+      flex-shrink: 0;
+    }
+    .pix-copy-btn:hover { background: #333; }
+    .pix-copy-btn.copied { background: var(--color-green); }
+
+    .pix-steps {
+      width: 100%;
+      background: var(--color-bg-subtle);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: .875rem 1rem;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+    .pix-steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: .625rem;
+      font-size: .8125rem;
+      color: var(--color-fg-muted);
+      line-height: 1.45;
+    }
+    .pix-steps__num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .625rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      color: var(--color-fg);
+    }
+
+    .pix-footer {
+      padding: .75rem 1.1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+    .pix-confirm-note {
+      font-size: .6875rem;
+      color: var(--color-fg-muted);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* ── Card success ─────────────────────────────────────────── */
+    .ck-success {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      gap: .875rem;
+    }
+    .ck-success.is-visible { display: flex; }
+    .ck-success__icon {
+      width: 52px;
+      height: 52px;
+      background: var(--color-green-bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-green);
+    }
+    .ck-success__title { font-size: 1.125rem; font-weight: 600; }
+    .ck-success__sub { font-size: .875rem; color: var(--color-fg-muted); line-height: 1.5; }
+  </style>
+  <!-- UTMify: UTM capture + pixel -->
+  <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+  <script>
+    window.pixelId = "69ddc7b2f656b67f74acd8ad";
+    var a = document.createElement("script");
+    a.setAttribute("async", "");
+    a.setAttribute("defer", "");
+    a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+    document.head.appendChild(a);
+  </script>
+</head>
+<body>
+
+  <!-- Banner -->
+  <div class="ck-banner">10% OFF no Pix &nbsp;·&nbsp; 3x sem juros ou até 6x no cartão</div>
+
+  <!-- Header -->
+  <header class="ck-header">
+    <a href="index.html" class="ck-header__logo" aria-label="BELLARIO — Página inicial">
+      <svg viewBox="0 0 300 50" aria-hidden="true" focusable="false">
+        <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle"
+          font-family="'Cormorant Garamond', Garamond, Georgia, serif"
+          font-weight="300" font-size="26" letter-spacing="10" fill="currentColor">BELLARIO</text>
+      </svg>
+    </a>
+    <div class="ck-header__cart" title="Compra segura">
+      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Compra segura"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </div>
+  </header>
+
+  <!-- Page wrap -->
+  <main class="ck-wrap">
+
+    <!-- ── Resume Card ── -->
+    <div class="ck-card" id="resumeCard">
+      <button class="ck-resume__toggle" id="resumeToggle" aria-expanded="false" aria-controls="resumeBody">
+        <span class="ck-resume__toggle-left">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span id="resumeLabel">Resumo</span>
+        </span>
+        <span class="ck-resume__toggle-right">
+          <span class="ck-resume__total" id="resumeTotal">R$ 0,00</span>
+          <svg class="ck-resume__chevron" id="resumeChevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </span>
+      </button>
+
+      <!-- Progress bar -->
+      <div class="ck-resume__progress">
+        <p class="ck-resume__progress-msg" id="resumeProgressMsg">Adicione mais para ganhar benefícios</p>
+        <div class="ck-resume__track">
+          <div class="ck-resume__fill" id="resumeProgressFill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Items list (collapsible) -->
+      <div class="ck-resume__body" id="resumeBody" role="region">
+        <!-- populated by JS -->
+      </div>
+
+      <!-- Coupon — inside the card, discrete -->
+      <div class="ck-resume__coupon-wrap">
+        <div class="ck-resume__coupon" id="couponToggle" role="button" tabindex="0" onclick="toggleCoupon()" onkeydown="if(event.key==='Enter')toggleCoupon()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          <span id="couponToggleLabel">Tem um cupom?</span>
+        </div>
+        <div id="couponField" style="display:none; padding:0 1.1rem .75rem">
+          <div style="display:flex;gap:.5rem">
+            <input type="text" id="couponInput" placeholder="Código do cupom" style="flex:1;padding:.6rem .875rem;border:1px solid var(--color-border);border-radius:var(--radius);font-family:var(--font);font-size:.875rem;outline:none;text-transform:uppercase" oninput="this.value=this.value.toUpperCase()">
+            <button onclick="applyCoupon()" style="padding:.6rem 1rem;background:var(--color-fg);color:#fff;border:none;border-radius:var(--radius);font-family:var(--font);font-size:.8125rem;font-weight:600;cursor:pointer;white-space:nowrap">Aplicar</button>
+          </div>
+          <p id="couponMsg" style="font-size:.6875rem;color:var(--color-fg-muted);margin-top:.35rem;display:none"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- STEP 1 — Identificação                                   -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <div class="ck-card ck-step is-active" id="step1">
+      <div class="ck-step-header">
+        <h2>Identificação</h2>
+        <div class="ck-step-header__meta">
+          <span>1 de 3</span>
+        </div>
+      </div>
+
+      <form class="ck-form" id="formStep1" novalidate>
+        <div class="ck-field">
+          <input type="text" id="inputName" name="name" autocomplete="name" required>
+          <label for="inputName">Nome completo</label>
+        </div>
+
+        <div class="ck-field">
+          <input type="email" id="inputEmail" name="email" autocomplete="email" required>
+          <label for="inputEmail">E-mail</label>
+        </div>
+
+        <div class="ck-field">
+          <input type="text" id="inputCpf" name="cpf" inputmode="numeric" maxlength="14" autocomplete="off" required>
+          <label for="inputCpf">CPF</label>
+        </div>
+
+        <div class="ck-field">
+          <input type="tel" id="inputPhone" name="phone" inputmode="tel" maxlength="15" autocomplete="tel" required>
+          <label for="inputPhone">WhatsApp / Celular</label>
+        </div>
+
+        <!-- PIX badge -->
+        <div class="ck-pix-badge">
+          <img src="images/icon-pix-verde.png" width="18" height="18" alt="" aria-hidden="true" style="object-fit:contain;flex-shrink:0">
+          <span>Você ganhou <strong>10% de desconto</strong> pagando com Pix</span>
+        </div>
+
+        <button type="submit" class="ck-btn">Ir para Entrega</button>
+
+        <p class="ck-privacy">
+          Ao prosseguir com a compra, você concorda<br>
+          com as <a href="#">Políticas de Privacidade</a>
+        </p>
+      </form>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- STEP 2 — Entrega (CEP + endereço)                        -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <div class="ck-card ck-step" id="step2">
+      <div class="ck-step-header">
+        <h2>Entrega</h2>
+        <div class="ck-step-header__meta">
+          <button class="ck-step-header__back" id="backToStep1">Voltar</button>
+          <span>2 de 3</span>
+        </div>
+      </div>
+
+      <form class="ck-form" id="formStep2" novalidate>
+        <!-- CEP row -->
+        <div class="ck-cep-row">
+          <div class="ck-field">
+            <input type="text" id="inputCep" name="cep" inputmode="numeric" maxlength="9" autocomplete="postal-code" required>
+            <label for="inputCep">CEP</label>
+          </div>
+          <div class="ck-cep-city" id="cepCityDisplay"></div>
+          <span class="ck-cep-spinner" id="cepSpinner" aria-label="Buscando CEP..."></span>
+        </div>
+
+        <!-- Address fields (hidden until CEP fetched) -->
+        <div id="addressFields" style="display:none">
+          <div class="ck-field">
+            <input type="text" id="inputStreet" name="street" autocomplete="address-line1" required>
+            <label for="inputStreet">Endereço</label>
+          </div>
+
+          <div class="ck-row">
+            <div class="ck-field">
+              <input type="text" id="inputNumber" name="number" inputmode="numeric" required>
+              <label for="inputNumber">Número</label>
+            </div>
+            <div class="ck-field">
+              <input type="text" id="inputNeighborhood" name="neighborhood" required>
+              <label for="inputNeighborhood">Bairro</label>
+            </div>
+          </div>
+
+          <div class="ck-field">
+            <input type="text" id="inputComplement" name="complement" autocomplete="address-line2">
+            <label for="inputComplement">Complemento (opcional)</label>
+          </div>
+
+          <div class="ck-field">
+            <input type="text" id="inputRecipient" name="recipient" autocomplete="name" required>
+            <label for="inputRecipient">Destinatário</label>
+          </div>
+
+          <button type="submit" class="ck-btn">Continuar</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- STEP 3 — Formas de envio                                 -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <div class="ck-card ck-step" id="step3">
+      <div class="ck-step-header">
+        <h2>Entrega</h2>
+        <div class="ck-step-header__meta">
+          <button class="ck-step-header__back" id="backToStep2">Voltar</button>
+          <span>2 de 3</span>
+        </div>
+      </div>
+
+      <!-- Saved address -->
+      <div class="ck-addr-list" id="addrList">
+        <!-- populated by JS -->
+      </div>
+
+      <!-- Shipping options -->
+      <p class="ck-ship-title">Escolha uma forma de entrega:</p>
+      <div class="ck-ship-list" id="shipList">
+        <!-- populated by JS -->
+      </div>
+
+      <p class="ck-legal">
+        Ao finalizar a compra, declaro estar ciente das condições de devolução,
+        conforme o Código de Defesa do Consumidor. O direito de devolução em
+        até 7 dias aplica-se a produtos sem uso e em condições adequadas,
+        especialmente por se tratar de item íntimo, com lacre e etiquetas intactos.
+      </p>
+
+      <div style="padding:0 1.1rem .875rem;">
+        <button class="ck-btn" id="btnToPayment">Ir para Pagamento</button>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- STEP 4 — Pagamento                                       -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <div class="ck-card ck-step" id="step4">
+
+      <!-- PIX payment screen -->
+      <div class="pix-screen" id="pixScreen">
+        <div class="pix-screen__header">
+          <span class="pix-screen__title">Pagamento Pix</span>
+          <span id="pixOrderNumber" style="font-size:.75rem;color:var(--color-fg-muted);letter-spacing:.04em;font-weight:500"></span>
+        </div>
+
+        <div class="pix-timer-bar">
+          <span class="pix-timer-bar__label">
+            <span class="pix-timer-bar__dot"></span>
+            Aguardando pagamento
+          </span>
+          <span class="pix-timer-bar__time" id="pixTimerDisplay">15:00</span>
+        </div>
+
+        <div class="pix-body">
+          <!-- Amount -->
+          <div class="pix-amount-block">
+            <p class="pix-amount-label">Valor a pagar</p>
+            <p class="pix-amount-value" id="pixScreenValue">R$ 0,00</p>
+          </div>
+
+          <!-- QR Code -->
+          <div class="pix-qr-wrap">
+            <img id="pixQrImg" alt="QR Code PIX" width="200" height="200">
+            <div class="pix-qr-brand">
+              <img src="images/icon-pix.svg" alt=""> Pix
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="pix-divider">ou</div>
+
+          <!-- Copy & Paste -->
+          <div class="pix-copy-block">
+            <p class="pix-copy-label">Pix Copia e Cola</p>
+            <div class="pix-copy-field">
+              <input type="text" id="pixCodeInput" readonly value="">
+              <button class="pix-copy-btn" id="pixCopyBtn" onclick="copyPixCode()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copiar
+              </button>
+            </div>
+          </div>
+
+          <!-- Steps -->
+          <ol class="pix-steps">
+            <li><span class="pix-steps__num">1</span>Abra o app do seu banco e acesse a área Pix</li>
+            <li><span class="pix-steps__num">2</span>Escolha <strong>Pagar com QR Code</strong> ou <strong>Copia e Cola</strong></li>
+            <li><span class="pix-steps__num">3</span>Confirme o valor e finalize o pagamento</li>
+            <li><span class="pix-steps__num">4</span>Sua confirmação chega em segundos</li>
+          </ol>
+        </div>
+
+        <div class="pix-footer">
+          <p class="pix-confirm-note">O pedido é confirmado automaticamente após o pagamento.<br>Você receberá um e-mail de confirmação.</p>
+          <button class="ck-btn" id="btnPixConfirm" style="background:var(--color-green)">Já realizei o pagamento</button>
+        </div>
+      </div>
+
+      <!-- Success (card or after pix confirm) -->
+      <div class="ck-success" id="paySuccess">
+        <div class="ck-success__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <p class="ck-success__title">Pedido confirmado!</p>
+        <p class="ck-success__sub">Em breve você receberá a confirmação<br>no e-mail informado.</p>
+        <a href="index.html" class="ck-btn" style="max-width:240px">Continuar comprando</a>
+      </div>
+
+      <!-- Payment form (hidden after success) -->
+      <div id="payForm">
+        <div class="ck-step-header">
+          <h2>Pagamento</h2>
+          <div class="ck-step-header__meta">
+            <button class="ck-step-header__back" id="backToStep3">Voltar</button>
+            <span>3 de 3</span>
+          </div>
+        </div>
+
+        <div class="ck-payment-processor">
+          Pagamento seguro via <img src="images/mercado-pago-logo.png" height="22" width="auto" alt="Mercado Pago" style="object-fit:contain">
+        </div>
+
+        <div class="ck-pay-options">
+
+          <!-- ── Cartão de crédito ── -->
+          <div class="ck-pay-option" id="payOptCard">
+            <div class="ck-pay-option__header" onclick="selectPayMethod('card')">
+              <input type="radio" name="payMethod" value="card" id="radioCard">
+              <span class="ck-pay-option__label">Cartão de crédito</span>
+              <div class="ck-brands">
+                <img class="ck-brand" src="images/american_express-1efdc6a3.svg" alt="American Express">
+                <img class="ck-brand" src="images/visa-65d650f7.svg" alt="Visa">
+                <img class="ck-brand" src="images/diners_club-678e3046.svg" alt="Diners Club">
+                <img class="ck-brand" src="images/master-54b5a7ce.svg" alt="Mastercard">
+                <img class="ck-brand" src="images/discover-59880595.svg" alt="Discover">
+                <img class="ck-brand" src="images/hypercard-8dca2006.svg" alt="Hipercard">
+                <img class="ck-brand" src="images/elo-2d6b82b5.svg" alt="Elo">
+              </div>
+            </div>
+
+            <div class="ck-pay-content" id="cardContent">
+              <!-- Pagou Payment Element (hosted card fields) -->
+              <div id="card-element" style="margin-bottom:.625rem"></div>
+
+              <div class="ck-card-form">
+                <div class="ck-plain-field">
+                  <select id="cardInstallments">
+                    <option value="1">1x — calculando...</option>
+                  </select>
+                  <svg class="ck-plain-field__chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <p id="cardError" style="font-size:.75rem;color:#c60c0c;display:none;padding:.25rem 0"></p>
+                <button type="button" class="ck-btn" id="btnFinishCard">Finalizar compra</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Pix ── -->
+          <div class="ck-pay-option ck-pay-option--pix" id="payOptPix">
+            <div class="ck-pay-option__header" onclick="selectPayMethod('pix')">
+              <input type="radio" name="payMethod" value="pix" id="radioPix" checked>
+              <img src="images/icon-pix.svg" class="ck-pix-icon" alt="" aria-hidden="true">
+              <span class="ck-pay-option__label">Pix</span>
+              <span class="ck-pay-badge">10% DE DESCONTO</span>
+            </div>
+
+            <div class="ck-pay-content is-open" id="pixContent">
+              <p class="ck-pix-desc">A confirmação de pagamento é realizada em poucos minutos. Utilize o aplicativo do seu banco para pagar.</p>
+              <p class="ck-pix-value" id="pixValueDisplay"></p>
+              <button type="button" class="ck-btn" id="btnFinishPix">Finalizar compra</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    'use strict';
+
+    /* ── Cart from localStorage ──────────────────────────────── */
+    let cartItems = [];
+    try {
+      const saved = localStorage.getItem('bellario_cart');
+      if (saved) cartItems = JSON.parse(saved) || [];
+    } catch(e) { cartItems = []; }
+
+    const cartTotal = cartItems.reduce((s, i) => s + i.price * i.qty, 0);
+    const cartCount = cartItems.reduce((s, i) => s + i.qty, 0);
+
+    function fmt(n) { return 'R$ ' + n.toFixed(2).replace('.', ','); }
+
+    /* ── Pagou config ──────────────────────────────────── */
+    const PAGOU_ENV        = 'sandbox'; // change to 'production' for live
+    const PAGOU_PUBLIC_KEY = 'pk_live_298wIyWN0s9J2fnxxvSKdlWJdQ94VmPtXfZEn2LdZac';
+    const PAGOU_API_BASE   = '/.netlify/functions';
+
+    let pagouElements = null;
+    let pagouCardEl   = null;
+    let ckOrderRef    = null; // stable ref per checkout session
+
+    function getBuyerInfo() {
+      return {
+        name:     document.getElementById('inputName').value.trim(),
+        email:    document.getElementById('inputEmail').value.trim(),
+        document: {
+          type:   'CPF',
+          number: document.getElementById('inputCpf').value.replace(/\D/g, ''),
+        },
+      };
+    }
+
+    /* ── UTMify helpers ──────────────────────────────────────────── */
+    function getUtmParams() {
+      // Prefer URL query string (most reliable at checkout time)
+      const params = {};
+      try {
+        const sp = new URLSearchParams(window.location.search);
+        ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','src'].forEach(k => {
+          const v = sp.get(k);
+          if (v) params[k] = v;
+        });
+        // Fallback: UTMify stores values in sessionStorage/localStorage under "utmify_*"
+        if (!params.utm_source) {
+          ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','src'].forEach(k => {
+            const v = sessionStorage.getItem('utmify_' + k) || localStorage.getItem('utmify_' + k);
+            if (v) params[k] = v;
+          });
+        }
+      } catch(e) { /* storage access denied */ }
+      return params;
+    }
+
+    async function notifyUtmify(orderId, status, paymentMethod, products, approvedDate) {
+      try {
+        const buyer   = getBuyerInfo();
+        const utms    = getUtmParams();
+        const shipPrice  = getShipPrice();
+        const orderTotal = cartTotal + shipPrice;
+        const finalTotal = paymentMethod === 'pix' ? orderTotal * 0.90 : orderTotal;
+        const nowIso     = new Date().toISOString();
+
+        const payload = {
+          orderId,
+          platform:      'other',
+          paymentMethod: paymentMethod === 'pix' ? 'pix' : 'credit_card',
+          status,
+          createdAt:     nowIso,
+          approvedDate:  approvedDate || (status === 'paid' ? nowIso : null),
+          refundedAt:    null,
+          customer: {
+            name:  buyer.name,
+            email: buyer.email,
+            phone: document.getElementById('inputPhone')?.value?.replace(/\D/g,'') || null,
+            document: buyer.document.number || null,
+          },
+          products: products.map(p => ({
+            id:       p.title?.toLowerCase().replace(/\s+/g,'-') || 'produto',
+            name:     p.title || p.name || 'Produto',
+            planId:   null,
+            planName: null,
+            quantity: p.qty ?? (p.quantity || 1),
+            priceInCents: Math.round((p.price || 0) * (paymentMethod === 'pix' ? 0.90 : 1) * 100),
+          })),
+          // ✅ SNAKE_CASE - formato esperado pela UTMify API
+          trackingParameters: {
+            utm_source:   utms.utm_source   || null,
+            utm_medium:   utms.utm_medium   || null,
+            utm_campaign: utms.utm_campaign || null,
+            utm_term:     utms.utm_term     || null,
+            utm_content:  utms.utm_content  || null,
+            src:          utms.src          || null,
+          },
+          commission: {
+            totalPriceInCents: Math.round(finalTotal * 100),
+            gatewayFeeInCents: 0,
+            userValueInCents:  Math.round(finalTotal * 100),
+          },
+        };
+
+        console.log('[UTMIFY DEBUG] Payload para UTMify:', JSON.stringify(payload, null, 2));
+        
+        const res = await fetch('/.netlify/functions/notify-utmify', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(payload),
+        });
+
+        const resText = await res.text();
+        console.log('[UTMIFY DEBUG] Response:', res.status, resText.slice(0, 500));
+        
+        if (!res.ok) {
+          console.error('[UTMIFY ERROR 400/422]', resText);
+        } else {
+          console.log('[UTMIFY ✅]', 'Notificação enviada com sucesso');
+        }
+      } catch(e) {
+        console.error('[UTMIFY CRASH]', e);
+      }
+    }
+
+    /* ── Header count ────────────────────────────────────────── */
+    const headerCartCount = document.getElementById('headerCartCount');
+    if (headerCartCount) headerCartCount.textContent = cartCount;
+
+    /* ── Resume toggle ───────────────────────────────────────── */
+    const resumeToggle  = document.getElementById('resumeToggle');
+    const resumeBody    = document.getElementById('resumeBody');
+    const resumeChevron = document.getElementById('resumeChevron');
+    const resumeLabel   = document.getElementById('resumeLabel');
+    const resumeTotalEl = document.getElementById('resumeTotal');
+
+    resumeLabel.textContent  = `Resumo (${cartCount})`;
+    resumeTotalEl.textContent = fmt(cartTotal);
+
+    resumeToggle.addEventListener('click', () => {
+      const open = resumeBody.classList.toggle('is-open');
+      resumeChevron.classList.toggle('is-open', open);
+      resumeToggle.setAttribute('aria-expanded', open);
+    });
+
+    /* ── Resume items ────────────────────────────────────────── */
+    resumeBody.innerHTML = cartItems.map(item => `
+      <div class="ck-resume__item">
+        ${item.image
+          ? `<img src="${item.image}" alt="${item.title}" class="ck-resume__item-img" loading="lazy">`
+          : `<div class="ck-resume__item-img"></div>`}
+        <div class="ck-resume__item-info">
+          <p class="ck-resume__item-name">${item.title}</p>
+          <p class="ck-resume__item-variant">
+            ${item.size  ? `Tam: ${item.size}` : ''}
+            ${item.size && item.color ? ' · ' : ''}
+            ${item.color ? `Cor: ${item.color}` : ''}
+            ${item.qty > 1 ? ` · Qtd: ${item.qty}` : ''}
+          </p>
+        </div>
+        <span class="ck-resume__item-price">${fmt(item.price * item.qty)}</span>
+      </div>
+    `).join('') || '<div style="padding:.875rem 1.1rem;font-size:.8125rem;color:var(--color-fg-muted)">Carrinho vazio</div>';
+
+    /* ── Progress bar ────────────────────────────────────────── */
+    const progressMsg  = document.getElementById('resumeProgressMsg');
+    const progressFill = document.getElementById('resumeProgressFill');
+    const sub = cartTotal;
+    const tiers = [
+      { v: 149.90, label: 'Frete Grátis' },
+      { v: 199.90, label: '+15% OFF'     },
+      { v: 299.90, label: '+20% OFF'     },
+    ];
+    const nextTier = tiers.find(t => sub < t.v);
+    if (!nextTier) {
+      progressMsg.innerHTML = 'Todos os benefícios desbloqueados!';
+      progressFill.style.width = '100%';
+    } else {
+      const prevV = tiers[tiers.indexOf(nextTier) - 1]?.v || 0;
+      const pct   = Math.min(100, ((sub - prevV) / (nextTier.v - prevV)) * 100).toFixed(1);
+      progressMsg.innerHTML = `Adicione <strong>${fmt(nextTier.v - sub)}</strong> e ganhe <strong>${nextTier.label}</strong>!`;
+      progressFill.style.width = pct + '%';
+    }
+
+    /* ── Floating label helper ───────────────────────────────── */
+    document.querySelectorAll('.ck-field input').forEach(input => {
+      const update = () => input.classList.toggle('has-value', input.value.length > 0);
+      input.addEventListener('input', update);
+      input.addEventListener('change', update);
+      update();
+    });
+
+    /* ── CPF mask ────────────────────────────────────────────── */
+    document.getElementById('inputCpf').addEventListener('input', function() {
+      let v = this.value.replace(/\D/g, '').slice(0, 11);
+      if (v.length > 9) v = v.replace(/^(\d{3})(\d{3})(\d{3})(\d+)/, '$1.$2.$3-$4');
+      else if (v.length > 6) v = v.replace(/^(\d{3})(\d{3})(\d+)/, '$1.$2.$3');
+      else if (v.length > 3) v = v.replace(/^(\d{3})(\d+)/, '$1.$2');
+      this.value = v;
+      this.classList.toggle('has-value', v.length > 0);
+    });
+
+    /* ── Phone mask ──────────────────────────────────────────── */
+    document.getElementById('inputPhone').addEventListener('input', function() {
+      let v = this.value.replace(/\D/g, '').slice(0, 11);
+      if (v.length > 6) v = v.replace(/^(\d{2})(\d{5})(\d+)/, '($1) $2-$3');
+      else if (v.length > 2) v = v.replace(/^(\d{2})(\d+)/, '($1) $2');
+      this.value = v;
+      this.classList.toggle('has-value', v.length > 0);
+    });
+
+    /* ── Step navigation ─────────────────────────────────────── */
+    function goTo(stepId) {
+      document.querySelectorAll('.ck-step').forEach(s => s.classList.remove('is-active', 'is-entering'));
+      const next = document.getElementById(stepId);
+      next.classList.add('is-active');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        next.classList.add('is-entering');
+        next.addEventListener('animationend', () => next.classList.remove('is-entering'), { once: true });
+      }));
+    }
+
+    /* ── Button loading helper ───────────────────────────────── */
+    function loadBtn(btn, ms, callback) {
+      btn.classList.add('ck-btn--loading');
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.classList.remove('ck-btn--loading');
+        btn.disabled = false;
+        callback();
+      }, ms);
+    }
+
+    /* ── Step 1 submit ───────────────────────────────────────── */
+    document.getElementById('formStep1').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name  = document.getElementById('inputName').value.trim();
+      const email = document.getElementById('inputEmail').value.trim();
+      const cpf   = document.getElementById('inputCpf').value.trim();
+      const phone = document.getElementById('inputPhone').value.trim();
+      if (!name || !email || !cpf || !phone) return;
+      const recip = document.getElementById('inputRecipient');
+      if (!recip.value) { recip.value = name; recip.classList.add('has-value'); }
+      const btn = this.querySelector('button[type="submit"]');
+      loadBtn(btn, 600, () => goTo('step2'));
+    });
+
+    /* ── Back buttons (instant — going backwards needs no delay) */
+    document.getElementById('backToStep1').addEventListener('click', () => goTo('step1'));
+    document.getElementById('backToStep2').addEventListener('click', () => goTo('step2'));
+
+    /* ── CEP lookup ──────────────────────────────────────────── */
+    const cepInput       = document.getElementById('inputCep');
+    const cepCityDisplay = document.getElementById('cepCityDisplay');
+    const cepSpinner     = document.getElementById('cepSpinner');
+    const addressFields  = document.getElementById('addressFields');
+    const cepField       = cepInput.closest('.ck-field');
+
+    cepInput.addEventListener('input', function() {
+      let v = this.value.replace(/\D/g, '').slice(0, 8);
+      if (v.length > 5) v = v.replace(/^(\d{5})(\d+)/, '$1-$2');
+      this.value = v;
+      this.classList.toggle('has-value', v.length > 0);
+      if (v.replace(/\D/g, '').length === 8) fetchCep(v.replace(/\D/g, ''));
+    });
+
+    async function fetchCep(cep) {
+      // Loading state on field
+      cepField.classList.add('ck-field--loading');
+      cepCityDisplay.innerHTML = '<span class="ck-cep-city--skeleton"></span>';
+      addressFields.style.display = 'none';
+      addressFields.classList.remove('is-entering');
+
+      try {
+        const res  = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = await res.json();
+
+        if (data.erro) {
+          cepCityDisplay.textContent = 'CEP não encontrado';
+          return;
+        }
+
+        // Small pause so the skeleton feels intentional, not instant
+        await new Promise(r => setTimeout(r, 300));
+
+        cepCityDisplay.textContent = `${data.localidade} / ${data.uf}`;
+
+        const street = document.getElementById('inputStreet');
+        const neigh  = document.getElementById('inputNeighborhood');
+        street.value = data.logradouro || '';
+        neigh.value  = data.bairro     || '';
+        [street, neigh].forEach(el => el.classList.toggle('has-value', el.value.length > 0));
+
+        // Show fields with staggered animation
+        addressFields.style.display = 'flex';
+        addressFields.style.flexDirection = 'column';
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          addressFields.classList.add('is-entering');
+          addressFields.addEventListener('animationend', () => {}, { once: true });
+          setTimeout(() => document.getElementById('inputNumber').focus(), 220);
+        }));
+
+      } catch(err) {
+        cepCityDisplay.textContent = 'Erro ao buscar CEP';
+      } finally {
+        cepField.classList.remove('ck-field--loading');
+      }
+    }
+
+    /* ── Step 2 submit ───────────────────────────────────────── */
+    let savedAddress = null;
+
+    document.getElementById('formStep2').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const street = document.getElementById('inputStreet').value.trim();
+      const number = document.getElementById('inputNumber').value.trim();
+      const neigh  = document.getElementById('inputNeighborhood').value.trim();
+      const comp   = document.getElementById('inputComplement').value.trim();
+      const recip  = document.getElementById('inputRecipient').value.trim();
+      const cep    = document.getElementById('inputCep').value.trim();
+      const city   = document.getElementById('cepCityDisplay').textContent;
+      if (!street || !number || !neigh || !recip) return;
+      savedAddress = { street, number, neigh, comp, recip, cep, city };
+      renderStep3();
+      const btn = this.querySelector('button[type="submit"]');
+      loadBtn(btn, 550, () => goTo('step3'));
+    });
+
+    /* ── Step 3 render ───────────────────────────────────────── */
+    /* ── Dynamic delivery date ───────────────────────────────── */
+    function deliveryEta(daysAhead) {
+      const days = ['domingo','segunda','terça','quarta','quinta','sexta','sábado'];
+      const d = new Date();
+      d.setDate(d.getDate() + daysAhead);
+      const dayName = days[d.getDay()];
+      const dayNum  = d.getDate();
+      return `Chega até ${dayName}, dia ${dayNum}`;
+    }
+
+    const SHIPPING_OPTIONS = [
+      { id: 'jt',    name: 'J&T Express',  eta: deliveryEta(9), price: 14.32 },
+      { id: 'jadlog',name: 'Jadlog',        eta: deliveryEta(7), price: 15.01 },
+      { id: 'loggi', name: 'Loggi Express', eta: deliveryEta(5), price: 17.88 },
+    ];
+
+    const freeShipThreshold = 149.90;
+    const freeShipId        = 'jadlog';
+
+    // Auto-select Jadlog (free) if cart qualifies, otherwise J&T
+    let selectedShip = cartTotal >= freeShipThreshold ? freeShipId : SHIPPING_OPTIONS[0].id;
+
+    function getShipPrice() {
+      if (cartTotal >= freeShipThreshold && selectedShip === freeShipId) return 0;
+      return SHIPPING_OPTIONS.find(o => o.id === selectedShip)?.price || 0;
+    }
+
+    function renderStep3() {
+      if (!savedAddress) return;
+
+      const { street, number, neigh, comp, recip, cep, city } = savedAddress;
+      const fullAddr = `${street}, ${number}${comp ? ', ' + comp : ''} - ${neigh}`;
+      const hasFreeShip = cartTotal >= freeShipThreshold;
+
+      document.getElementById('addrList').innerHTML = `
+        <label class="ck-addr-option is-selected">
+          <input type="radio" name="addr" value="0" checked>
+          <div class="ck-addr-option__info">
+            <div>${fullAddr}</div>
+            <div style="color:var(--color-fg-muted);font-size:.75rem">${city.replace(' / ', '-')} | CEP ${cep}</div>
+          </div>
+          <div class="ck-addr-option__actions">
+            <button type="button" onclick="goTo('step2')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Editar
+            </button>
+          </div>
+        </label>`;
+
+      document.getElementById('shipList').innerHTML = SHIPPING_OPTIONS.map(opt => {
+        const isFree    = hasFreeShip && opt.id === freeShipId;
+        const isSelected = opt.id === selectedShip;
+        const priceLabel = isFree
+          ? `<span class="ck-ship-option__price" style="color:var(--color-green)">Grátis</span>`
+          : `<span class="ck-ship-option__price">${fmt(opt.price)}</span>`;
+        return `
+          <label class="ck-ship-option${isSelected ? ' is-selected' : ''}" data-ship-id="${opt.id}">
+            <input type="radio" name="ship" value="${opt.id}" ${isSelected ? 'checked' : ''}>
+            <div class="ck-ship-option__info">
+              <div class="ck-ship-option__name">${opt.name}</div>
+              <div class="ck-ship-option__eta">${opt.eta}</div>
+            </div>
+            ${priceLabel}
+          </label>`;
+      }).join('');
+
+      document.querySelectorAll('.ck-ship-option').forEach(label => {
+        label.addEventListener('click', () => {
+          selectedShip = label.dataset.shipId;
+          document.querySelectorAll('.ck-ship-option').forEach(l => l.classList.remove('is-selected'));
+          label.classList.add('is-selected');
+        });
+      });
+    }
+
+    /* ── Go to payment ───────────────────────────────────────── */
+    document.getElementById('btnToPayment').addEventListener('click', function() {
+      renderStep4();
+      loadBtn(this, 500, () => goTo('step4'));
+    });
+
+    document.getElementById('backToStep3').addEventListener('click', () => goTo('step3'));
+
+    /* ── Step 4 — Payment ────────────────────────────────────── */
+    /* ── Step 4 — Payment ────────────────────────────────── */
+    function renderStep4() {
+      const shipPrice  = getShipPrice();
+      const orderTotal = cartTotal + shipPrice;
+      const pixValue   = orderTotal * 0.90;
+      document.getElementById('pixValueDisplay').textContent = `Valor no Pix: ${fmt(pixValue)}`;
+
+      // Generate stable order ref once per checkout session
+      if (!ckOrderRef) {
+        ckOrderRef = `bellario-${Date.now()}-${Math.random().toString(36).slice(2,8)}`;
+      }
+
+      // Build installments immediately (Payment Element, no card number needed)
+      buildInstallments();
+
+      // Lazy-init Pagou Payment Element
+      initPagouElement();
+    }
+
+    function initPagouElement() {
+      if (typeof Pagou === 'undefined' || pagouElements) return;
+      try {
+        Pagou.setEnvironment(PAGOU_ENV);
+        pagouElements = Pagou.elements({
+          publicKey: PAGOU_PUBLIC_KEY,
+          locale:    'pt',
+          origin:    window.location.origin,
+        });
+        pagouCardEl = pagouElements.create('card', { theme: 'default' });
+        pagouCardEl.mount('#card-element');
+      } catch(e) {
+        console.error('Pagou init error:', e);
+      }
+    }
+
+    /* ── Payment method toggle ─────────────────────────────── */
+    window.selectPayMethod = function(method) {
+      document.getElementById('radioCard').checked = method === 'card';
+      document.getElementById('radioPix').checked  = method === 'pix';
+      document.getElementById('cardContent').classList.toggle('is-open', method === 'card');
+      document.getElementById('pixContent').classList.toggle('is-open',  method === 'pix');
+    };
+
+    /* ── Build installment options ─────────────────────────── */
+    function buildInstallments() {
+      const shipPrice  = getShipPrice();
+      const orderTotal = cartTotal + shipPrice;
+      const sel = document.getElementById('cardInstallments');
+      sel.innerHTML = '';
+      for (let n = 1; n <= 6; n++) {
+        const total    = n <= 3 ? orderTotal : orderTotal * 1.23;
+        const perMonth = total / n;
+        const label    = n <= 3
+          ? `${n}x de ${fmt(perMonth)} sem juros`
+          : `${n}x de ${fmt(perMonth)} (total ${fmt(total)})`;
+        const opt = document.createElement('option');
+        opt.value = n;
+        opt.textContent = label;
+        sel.appendChild(opt);
+      }
+    }
+
+    /* ── Card finalize ─────────────────────────────────────── */
+    function finalizeCard() {
+      document.getElementById('payForm').style.display = 'none';
+      notifyUtmify(ckOrderRef, 'paid', 'credit_card', cartItems);
+      showSuccess();
+    }
+
+    function showSuccess() {
+      document.getElementById('paySuccess').style.display = 'flex';
+      try { localStorage.removeItem('bellario_cart'); } catch(e) {}
+      const countEl = document.getElementById('headerCartCount');
+      if (countEl) countEl.textContent = '0';
+    }
+
+    document.getElementById('btnFinishCard').addEventListener('click', async function() {
+      const installments = parseInt(document.getElementById('cardInstallments').value) || 1;
+      const errDiv = document.getElementById('cardError');
+      errDiv.style.display = 'none';
+
+      if (!pagouElements) {
+        errDiv.style.display = 'block';
+        errDiv.textContent   = 'Processador de pagamento não carregado. Recarregue a página.';
+        return;
+      }
+
+      const btn = document.getElementById('btnFinishCard');
+      btn.classList.add('ck-btn--loading');
+      btn.disabled = true;
+
+      try {
+        const shipPrice   = getShipPrice();
+        const orderTotal  = cartTotal + shipPrice;
+        const amountCents = Math.round(orderTotal * 100);
+        const buyer       = getBuyerInfo();
+
+        // Products + optional shipping line item (must sum to amountCents)
+        const cardProducts = cartItems.map(i => ({
+          name:     i.title,
+          price:    Math.round(i.price * 100),
+          quantity: i.qty,
+        }));
+        if (shipPrice > 0) {
+          cardProducts.push({ name: 'Frete', price: Math.round(shipPrice * 100), quantity: 1 });
+        }
+
+        const result = await pagouElements.submit({
+          createTransaction: async (tokenData) => {
+            const res = await fetch(`${PAGOU_API_BASE}/create-transaction`, {
+              method:  'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body:    JSON.stringify({
+                method:       'credit_card',
+                external_ref: ckOrderRef,
+                amount:       amountCents,
+                token:        tokenData.token,
+                installments,
+                buyer,
+                products:     cardProducts,
+              }),
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.data?.message || data.message || 'Erro ao processar cartão');
+            // Return the inner transaction object — SDK expects { id, status, next_action? }
+            return data.data;
+          },
+        });
+
+        if (result && ['paid', 'authorized', 'approved'].includes(result.status)) {
+          finalizeCard();
+        } else if (result?.status === 'three_ds_required' && result.next_action?.url) {
+          window.location.href = result.next_action.url;
+        } else {
+          throw new Error('Pagamento não aprovado. Verifique os dados do cartão.');
+        }
+      } catch (err) {
+        btn.classList.remove('ck-btn--loading');
+        btn.disabled = false;
+        errDiv.style.display = 'block';
+        errDiv.textContent   = err.message || 'Erro ao processar pagamento.';
+      }
+    });
+
+    /* ── PIX screen ──────────────────────────────────────────── */
+    let pixTimerInterval = null;
+    let pixPollInterval  = null;
+
+    function startPixTimer(onExpire) {
+      clearInterval(pixTimerInterval);
+      let remaining = 15 * 60;
+      const display = document.getElementById('pixTimerDisplay');
+
+      function tick() {
+        const m = Math.floor(remaining / 60).toString().padStart(2,'0');
+        const s = (remaining % 60).toString().padStart(2,'0');
+        display.textContent = `${m}:${s}`;
+        display.classList.toggle('is-urgent', remaining <= 60);
+        if (remaining <= 0) { clearInterval(pixTimerInterval); onExpire && onExpire(); }
+        remaining--;
+      }
+      tick();
+      pixTimerInterval = setInterval(tick, 1000);
+    }
+
+    function showPixScreen(tx) {
+      const shipPrice  = getShipPrice();
+      const orderTotal = cartTotal + shipPrice;
+      const pixValue   = orderTotal * 0.90;
+
+      document.getElementById('payForm').style.display    = 'none';
+      document.getElementById('resumeCard').style.display = 'none';
+      document.getElementById('pixScreen').classList.add('is-visible');
+
+      document.getElementById('pixScreenValue').textContent = fmt(pixValue);
+      document.getElementById('pixCodeInput').value         = tx.data.pix.qr_code;
+      document.getElementById('pixOrderNumber').textContent =
+        `Pedido #${tx.data.id.slice(-8).toUpperCase()}`;
+
+        // Instant QR image via free API (qrserver.com) - fixes "bugado" text display
+        const qrImg = document.getElementById('pixQrImg');
+        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(tx.data.pix.qr_code)}`;
+        qrImg.onerror = () => console.warn('QR API failed, fallback text:', tx.data.pix.qr_code);
+
+      startPixTimer(() => {
+        document.getElementById('pixTimerDisplay').textContent = 'Expirado';
+        document.getElementById('btnPixConfirm').disabled = true;
+        clearInterval(pixPollInterval);
+      });
+
+      // Poll for automatic confirmation
+      pollPixStatus(tx.data.id);
+    }
+
+    async function pollPixStatus(transactionId) {
+      clearInterval(pixPollInterval);
+      pixPollInterval = setInterval(async () => {
+        try {
+          const res = await fetch(`${PAGOU_API_BASE}/get-transaction?id=${transactionId}`);
+          if (!res.ok) return;
+          const tx = await res.json();
+          if (tx.data?.status === 'paid') {
+            clearInterval(pixPollInterval);
+            clearInterval(pixTimerInterval);
+            document.getElementById('pixScreen').classList.remove('is-visible');
+            document.getElementById('resumeCard').style.display = '';
+            notifyUtmify(ckOrderRef, 'paid', 'pix', cartItems);
+            showSuccess();
+          }
+        } catch(e) { /* ignore polling errors */ }
+      }, 5000);
+    }
+
+    window.copyPixCode = function() {
+      const input = document.getElementById('pixCodeInput');
+      const btn   = document.getElementById('pixCopyBtn');
+      navigator.clipboard?.writeText(input.value).catch(() => {
+        input.select(); document.execCommand('copy');
+      });
+      btn.classList.add('copied');
+      btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copiado`;
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar`;
+      }, 2200);
+    };
+
+    document.getElementById('btnFinishPix').addEventListener('click', async function() {
+      const btn = this;
+      btn.classList.add('ck-btn--loading');
+      btn.disabled = true;
+
+      try {
+        const shipPrice  = getShipPrice();
+        const orderTotal = cartTotal + shipPrice;
+        const pixDiscount = 0.90; // 10% OFF no PIX
+        const pixCents    = Math.round(orderTotal * pixDiscount * 100);
+        const buyer       = getBuyerInfo();
+
+        // products.price deve bater com amount — aplica o mesmo desconto PIX
+        const pixProducts = cartItems.map(i => ({
+          name:     i.title,
+          price:    Math.round(i.price * pixDiscount * 100),
+          quantity: i.qty,
+        }));
+
+        const res = await fetch(`${PAGOU_API_BASE}/create-transaction`, {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify({
+            method:       'pix',
+            external_ref: ckOrderRef,
+            amount:       pixCents,
+            buyer,
+            products:     pixProducts,
+          }),
+        });
+
+        const tx = await res.json();
+        if (!res.ok) throw new Error(tx.message || 'Erro ao criar pagamento Pix');
+
+        btn.classList.remove('ck-btn--loading');
+        btn.disabled = false;
+        showPixScreen(tx);
+        notifyUtmify(ckOrderRef, 'waiting_payment', 'pix', cartItems);
+      } catch(err) {
+        btn.classList.remove('ck-btn--loading');
+        btn.disabled = false;
+        alert(err.message || 'Erro ao gerar código Pix. Tente novamente.');
+      }
+    });
+
+    /* ── Coupon toggle ─────────────────────────────────────── */
+    window.toggleCoupon = function() {
+      const field  = document.getElementById('couponField');
+      const label  = document.getElementById('couponToggleLabel');
+      const isOpen = field.style.display === 'block';
+      field.style.display = isOpen ? 'none' : 'block';
+      label.textContent   = isOpen ? 'Tem um cupom?' : 'Fechar cupom';
+      if (!isOpen) document.getElementById('couponInput').focus();
+    };
+
+    window.applyCoupon = function() {
+      const val = document.getElementById('couponInput').value.trim().toUpperCase();
+      const msg = document.getElementById('couponMsg');
+      msg.style.display = 'block';
+      if (!val) { msg.style.color = 'var(--color-fg-muted)'; msg.textContent = 'Digite um cupom.'; return; }
+      // Placeholder validation — integrate real coupon logic here
+      msg.style.color = '#c60c0c';
+      msg.textContent = 'Cupom inválido ou expirado.';
+    };
+
+    document.getElementById('btnPixConfirm').addEventListener('click', function() {
+      clearInterval(pixTimerInterval);
+      clearInterval(pixPollInterval);
+      document.getElementById('pixScreen').classList.remove('is-visible');
+      document.getElementById('resumeCard').style.display = '';
+      notifyUtmify(ckOrderRef, 'paid', 'pix', cartItems);
+      showSuccess();
+    });
+  </script>
+
+</body>
+</html>

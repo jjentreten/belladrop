@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="pt-BR" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a1a1a">
+  <title>Mini Camisola Baby-Doll L'eau Rouge + Calcinha — LADURRIE</title>
+  <meta name="description" content="Mini Camisola Baby-Doll L'eau Rouge + Calcinha. Sleepwear de luxo com renda delicada e alças finas reguláveis — LADURRIE.">
+  <meta property="og:site_name" content="LADURRIE SLEEPWEAR">
+  <meta property="og:url" content="https://ladurrie.com/products/mini-camisola-leau-rouge">
+  <meta property="og:title" content="Mini Camisola Baby-Doll L'eau Rouge + Calcinha — LADURRIE">
+  <meta property="og:type" content="product">
+  <meta property="og:image" content="https://cdn.dooca.store/161500/products/img-08-u5qut_800x1200+fill_ffffff.jpeg?v=1773592250">
+  <meta property="product:price:amount" content="119.80">
+  <meta property="product:price:currency" content="BRL">
+  <link rel="canonical" href="https://ladurrie.com/products/mini-camisola-leau-rouge">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    /* =====================================================
+       LADURRIE — PDP (Product Detail Page) — mobile-first
+       ===================================================== */
+
+
+    .pdp-breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .2rem;
+      padding: .625rem 1rem;
+      font-size: .6875rem;
+      letter-spacing: .04em;
+      color: var(--color-fg-muted);
+      background: var(--color-bg);
+    }
+    .pdp-breadcrumb a { color: inherit; text-decoration: none; }
+    .pdp-breadcrumb a:hover { color: var(--color-fg); }
+    .pdp-breadcrumb__sep { opacity: .4; margin: 0 .15rem; }
+    .pdp-breadcrumb span[aria-current] { color: var(--color-fg); }
+
+    .pdp-gallery { position: relative; background: #f5f2ef; }
+    .gallery-main-swiper { position: relative; overflow: hidden; }
+    .gallery-main-swiper .swiper-slide img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+    }
+    .gallery-badge-sale {
+      position: absolute;
+      top: .875rem;
+      left: .875rem;
+      z-index: 10;
+      background: var(--color-fg);
+      color: var(--color-bg);
+      font-size: .6875rem;
+      font-weight: var(--fw-bold);
+      letter-spacing: .06em;
+      padding: .25rem .5rem;
+      border-radius: 2px;
+    }
+    .gallery-thumbs-strip {
+      padding: .5rem 1rem .625rem;
+      background: #f5f2ef;
+    }
+    .gallery-thumbs-strip .swiper-slide {
+      border-radius: 2px;
+      overflow: hidden;
+      cursor: pointer;
+      opacity: .45;
+      transition: opacity var(--dur-fast) var(--ease);
+      border: 2px solid transparent;
+    }
+    .gallery-thumbs-strip .swiper-slide-thupdx-active {
+      opacity: 1;
+      border-color: var(--color-fg);
+    }
+    .gallery-thumbs-strip .swiper-slide img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+    }
+
+    .pdp-info {
+      padding: 1.125rem 1rem 2rem;
+      background: var(--color-bg);
+    }
+    @media (min-width: 900px) {
+      .pdp-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        max-width: var(--container-max);
+        margin: 0 auto;
+        align-items: start;
+      }
+      .pdp-gallery { position: sticky; top: var(--header-height-desk); }
+      .pdp-info { padding: 2rem 2.5rem 3rem; }
+    }
+    @media (min-width: 1100px) {
+      .pdp-wrap { grid-template-columns: 56% 1fr; }
+    }
+
+    .pdp-brand {
+      font-size: .6875rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--color-fg-muted);
+      margin-bottom: .25rem;
+    }
+    .pdp-title {
+      font-size: clamp(1.1rem, 4.5vw, 1.6rem);
+      font-weight: var(--fw-bold);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      line-height: 1.15;
+      margin-bottom: 0;
+    }
+
+    .pdp-price-block { margin-bottom: .875rem; }
+    .pdp-price--compare {
+      font-size: .875rem;
+      color: var(--color-fg-muted);
+      text-decoration: line-through;
+      margin-bottom: .1rem;
+    }
+    .pdp-price-main {
+      font-size: 1.5rem;
+      font-weight: var(--fw-bold);
+      color: var(--color-fg);
+    }
+    .pdp-installment-row {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      margin-top: .2rem;
+      font-size: .8125rem;
+      color: var(--color-fg-muted);
+    }
+    .pdp-installment-row svg { color: var(--color-fg-muted); flex-shrink: 0; }
+    .pdp-more-payment {
+      display: inline-block;
+      font-size: .75rem;
+      color: var(--color-fg-muted);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      margin-top: .3rem;
+      cursor: pointer;
+    }
+    .pdp-more-payment:hover { color: var(--color-fg); }
+
+    .pdp-divider {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      margin: 1rem 0;
+    }
+
+    .pdp-variant-label {
+      font-size: .8125rem;
+      margin-bottom: .5rem;
+      color: var(--color-fg);
+    }
+    .pdp-variant-label strong { font-weight: var(--fw-semibold); }
+
+    .size-row {
+      display: flex;
+      gap: .4rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .sz {
+      min-width: 48px;
+      height: 44px;
+      padding: 0 .75rem;
+      border: 1.5px solid #ccc;
+      background: var(--color-bg);
+      border-radius: 3px;
+      font-family: var(--font-body);
+      font-size: .8125rem;
+      font-weight: var(--fw-semibold);
+      letter-spacing: .04em;
+      cursor: pointer;
+      transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+      color: var(--color-fg);
+    }
+    .sz:hover { border-color: var(--color-fg); }
+    .sz.active {
+      border-color: var(--color-fg);
+      background: var(--color-fg);
+      color: #fff;
+    }
+    .sz.unavailable {
+      opacity: .3;
+      text-decoration: line-through;
+      cursor: not-allowed;
+    }
+
+    .pdp-color-swatch {
+      width: 52px;
+      height: 52px;
+      border-radius: 3px;
+      overflow: hidden;
+      border: 2px solid var(--color-fg);
+      cursor: pointer;
+    }
+    .pdp-color-swatch img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .qty-row {
+      display: flex;
+      align-items: stretch;
+      gap: .5rem;
+      margin-bottom: .875rem;
+    }
+    .qty-ctrl {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid var(--color-border);
+      border-radius: 3px;
+      overflow: hidden;
+      height: 52px;
+    }
+    .qty-btn {
+      width: 44px;
+      height: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: var(--color-fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--dur-fast) var(--ease);
+    }
+    .qty-btn:hover { background: var(--color-bg-cream); }
+    .qty-input {
+      width: 40px;
+      text-align: center;
+      border: none;
+      border-left: 1px solid var(--color-border);
+      border-right: 1px solid var(--color-border);
+      font-family: var(--font-body);
+      font-size: .9375rem;
+      font-weight: var(--fw-semibold);
+      color: var(--color-fg);
+      background: none;
+      -moz-appearance: textfield;
+    }
+    .qty-input::-webkit-inner-spin-button,
+    .qty-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+    .btn-buy {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      height: 52px;
+      background: var(--color-fg);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      font-family: var(--font-body);
+      font-size: .8125rem;
+      font-weight: var(--fw-bold);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background var(--dur-fast) var(--ease);
+    }
+    .btn-buy:hover { background: #2a2a2a; }
+
+    .pdp-wpp-link {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      margin-top: .875rem;
+      font-size: .8125rem;
+      color: var(--color-fg-muted);
+    }
+    .pdp-wpp-link a {
+      color: var(--color-fg);
+      font-weight: var(--fw-semibold);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+    }
+    .pdp-wpp-link a:hover { color: #128c4e; }
+    .pdp-wpp-link svg { color: #25d366; flex-shrink: 0; }
+
+    .pdp-shipping-strip {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      margin-top: 1rem;
+      padding: .75rem .875rem;
+      background: var(--color-bg-cream);
+      border-radius: 3px;
+      font-size: .8125rem;
+    }
+    .pdp-shipping-strip svg { color: var(--color-accent); flex-shrink: 0; }
+    .pdp-shipping-strip strong { font-weight: var(--fw-semibold); display: block; font-size: .8125rem; }
+    .pdp-shipping-strip span { font-size: .75rem; color: var(--color-fg-muted); }
+
+    .pdp-accordion { margin-top: 1.5rem; border-top: 1px solid var(--color-border); }
+    .pdp-acc-item { border-bottom: 1px solid var(--color-border); }
+    .pdp-acc-trigger {
+      width: 100%;
+      background: none;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .9375rem 0;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: .75rem;
+      font-weight: var(--fw-semibold);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--color-fg);
+      text-align: left;
+    }
+    .pdp-acc-trigger .acc-icon-left { color: var(--color-fg-muted); flex-shrink: 0; }
+    .pdp-acc-plus {
+      margin-left: auto;
+      flex-shrink: 0;
+      font-size: 1.25rem;
+      font-weight: 300;
+      line-height: 1;
+      transition: transform var(--dur-base) var(--ease);
+      color: var(--color-fg-muted);
+    }
+    .pdp-acc-item.is-open .pdp-acc-plus { transform: rotate(45deg); }
+    .pdp-acc-body {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height var(--dur-slow) var(--ease);
+    }
+    .pdp-acc-item.is-open .pdp-acc-body { max-height: 600px; }
+    .pdp-acc-inner {
+      padding-bottom: 1.125rem;
+      font-size: .875rem;
+      color: var(--color-fg-muted);
+      line-height: 1.75;
+    }
+    .pdp-acc-inner p + p { margin-top: .625rem; }
+    .pdp-acc-inner ul { list-style: none; padding: 0; margin: .375rem 0 0; display: flex; flex-direction: column; gap: .3rem; }
+    .pdp-acc-inner li::before { content: '—'; margin-right: .4rem; color: var(--color-accent); }
+
+    .desc-tab {
+      position: fixed;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      writing-mode: vertical-lr;
+      text-orientation: mixed;
+      z-index: 700;
+      background: var(--color-fg);
+      color: #fff;
+      font-size: .625rem;
+      font-weight: var(--fw-semibold);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .875rem .45rem;
+      cursor: pointer;
+      border: none;
+      font-family: var(--font-body);
+      white-space: nowrap;
+      border-radius: 3px 0 0 3px;
+    }
+    @media (min-width: 900px) { .desc-tab { font-size: .6875rem; } }
+
+    .desc-panel {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 1500;
+      display: none;
+      align-items: stretch;
+      justify-content: flex-end;
+    }
+    .desc-panel.is-open {
+      display: flex;
+      height: 100%;
+      height: 100dvh;
+    }
+    .desc-panel__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+    }
+    .desc-panel__drawer {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      height: 100%;
+      background: var(--color-bg);
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      padding: 1.5rem 1.25rem 2rem;
+      transform: translateX(100%);
+      transition: transform var(--dur-slow) var(--ease);
+    }
+    .desc-panel.is-open .desc-panel__drawer { transform: translateX(0); }
+    .desc-panel__close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: none; border: none;
+      cursor: pointer;
+      color: var(--color-fg-muted);
+      line-height: 1;
+    }
+    .desc-panel__title {
+      font-size: .875rem;
+      font-weight: var(--fw-bold);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      padding-right: 2rem;
+    }
+    .desc-panel h3 {
+      font-size: .6875rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-weight: var(--fw-semibold);
+      margin: 1.25rem 0 .625rem;
+      color: var(--color-fg);
+    }
+    .desc-panel p, .desc-panel li {
+      font-size: .875rem;
+      color: var(--color-fg-muted);
+      line-height: 1.75;
+    }
+    .desc-panel ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: .25rem; }
+    .desc-panel li::before { content: '—'; margin-right: .4rem; color: var(--color-accent); }
+    .size-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .8125rem;
+      margin-top: .5rem;
+    }
+    .size-table th, .size-table td {
+      padding: .45rem .625rem;
+      text-align: center;
+      border: 1px solid var(--color-border);
+    }
+    .size-table th {
+      background: var(--color-bg-cream);
+      font-size: .6875rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      font-weight: var(--fw-semibold);
+    }
+    .size-table tr:nth-child(even) td { background: var(--color-bg-cream); }
+
+    .sticky-buy {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 800;
+      background: var(--color-bg);
+      border-top: 1px solid var(--color-border);
+      padding: .625rem 1rem;
+    }
+    @media (min-width: 900px) { .sticky-buy { display: none; } }
+    .sticky-buy__btn {
+      width: 100%;
+      padding: .9rem;
+      background: var(--color-fg);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      font-family: var(--font-body);
+      font-size: .75rem;
+      font-weight: var(--fw-bold);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background var(--dur-fast) var(--ease);
+    }
+    .sticky-buy__btn:hover { background: #2a2a2a; }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20% { transform: translateX(-5px); }
+      40% { transform: translateX(5px); }
+      60% { transform: translateX(-3px); }
+      80% { transform: translateX(3px); }
+    }
+    .shake { animation: shake .4s ease; }
+
+    @media (max-width: 899px) { .pdp-info { padding-bottom: 5rem; } }
+  </style>
+  <!-- UTMify: UTM capture + pixel -->
+  <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+  <script>
+    window.pixelId = "69ddc7b2f656b67f74acd8ad";
+    var a = document.createElement("script");
+    a.setAttribute("async", "");
+    a.setAttribute("defer", "");
+    a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+    document.head.appendChild(a);
+  </script>
+</head>
+<body class="page-pdp">
+
+  <!-- ===== ANNOUNCEMENT BAR ===== -->
+  <div class="announcement-bar" role="region" aria-label="Anúncios">
+    <div class="announcement-bar__marquee">
+      <div class="announcement-bar__track">
+        <span>Parcelamento em até 3x sem juros</span>
+        <span class="announcement-bar__sep" aria-hidden="true">✦</span>
+        <span>Frete Cortesia a partir de R$ 149,90</span>
+        <span class="announcement-bar__sep" aria-hidden="true">✦</span>
+        <span>Produto artesanal — produzido no Brasil</span>
+        <span class="announcement-bar__sep" aria-hidden="true">✦</span>
+        <span>10% OFF no Pix</span>
+        <span class="announcement-bar__sep" aria-hidden="true">✦</span>
+        <span>Parcelamento em até 3x sem juros</span>
+        <span class="announcement-bar__sep" aria-hidden="true">✦</span>
+        <span>Frete Cortesia a partir de R$ 149,90</span>
+        <span class="announcement-bar__sep" aria-hidden="true">✦</span>
+        <span>Produto artesanal — produzido no Brasil</span>
+        <span class="announcement-bar__sep" aria-hidden="true">✦</span>
+        <span>10% OFF no Pix</span>
+        <span class="announcement-bar__sep" aria-hidden="true">✦</span>
+        <span>Parcelamento em até 3x sem juros</span>
+        <span class="announcement-bar__sep" aria-hidden="true">✦</span>
+        <span>Frete Cortesia a partir de R$ 149,90</span>
+        <span class="announcement-bar__sep" aria-hidden="true">✦</span>
+        <span>Produto artesanal — produzido no Brasil</span>
+        <span class="announcement-bar__sep" aria-hidden="true">✦</span>
+        <span>10% OFF no Pix</span>
+        <span class="announcement-bar__sep" aria-hidden="true">✦</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <button class="header__menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileDrawer">
+        <span class="header__hamburger"><span></span><span></span><span></span></span>
+      </button>
+      <a href="/" class="header__logo" aria-label="LADURRIE — Página inicial">
+        <svg class="header__logo-svg" viewBox="0 0 300 50" aria-hidden="true" focusable="false">
+          <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle"
+            font-family="'Cormorant Garamond', Garamond, Georgia, serif"
+            font-weight="300" font-size="26" letter-spacing="10" fill="currentColor">LADURRIE</text>
+        </svg>
+      </a>
+      <nav class="header__nav" aria-label="Navegação principal">
+        <ul class="header__nav-list">
+          <li class="header__nav-item has-dropdown">
+            <a href="#" class="header__nav-link">Conjuntos</a>
+            <div class="header__dropdown"><ul>
+              <li><a href="#">Conjunto Rive d'Or</a></li>
+              <li><a href="#">Conjunto La Chambre Dorée</a></li>
+              <li><a href="#">Ver todos os conjuntos</a></li>
+            </ul></div>
+          </li>
+          <li class="header__nav-item"><a href="#" class="header__nav-link">Camisolas</a></li>
+          <li class="header__nav-item"><a href="#" class="header__nav-link">Robes</a></li>
+          <li class="header__nav-item"><a href="#" class="header__nav-link">Pijamas</a></li>
+          <li class="header__nav-item"><a href="#" class="header__nav-link">Calcinhas</a></li>
+          <li class="header__nav-item"><a href="#" class="header__nav-link">Sobre nós</a></li>
+        </ul>
+      </nav>
+      <div class="header__icons">
+        <button class="header__icon-btn" id="searchToggle" aria-label="Buscar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <a href="#" class="header__icon-btn" aria-label="Minha conta">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
+        <button class="header__icon-btn header__cart-btn" id="cartToggle" aria-label="Carrinho">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="header__cart-count" id="cartCount" aria-live="polite">0</span>
+        </button>
+      </div>
+    </div>
+    <div class="header__search" id="searchBar" aria-hidden="true">
+      <div class="header__search-inner">
+        <form role="search" action="/search" method="get">
+          <input type="search" name="q" placeholder="O que você está procurando?" autocomplete="off" aria-label="Buscar produtos">
+          <button type="submit" aria-label="Buscar"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></button>
+        </form>
+        <button class="header__search-close" id="searchClose" aria-label="Fechar busca"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MOBILE DRAWER ===== -->
+  <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Menu de navegação">
+    <div class="mobile-drawer__overlay" id="drawerOverlay"></div>
+    <div class="mobile-drawer__panel">
+      <div class="mobile-drawer__header">
+        <span class="mobile-drawer__title">Menu</span>
+        <button class="mobile-drawer__close" id="drawerClose" aria-label="Fechar menu"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <nav class="mobile-drawer__nav" aria-label="Menu mobile">
+        <ul>
+          <li class="mobile-drawer__nav-item has-sub">
+            <button class="mobile-drawer__nav-link mobile-drawer__nav-toggle" aria-expanded="false">Conjuntos <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <ul class="mobile-drawer__sub-nav">
+              <li><a href="#">Conjunto Rive d'Or</a></li>
+              <li><a href="#">Conjunto La Chambre Dorée</a></li>
+              <li><a href="#">Ver todos os conjuntos</a></li>
+            </ul>
+          </li>
+          <li class="mobile-drawer__nav-item"><a href="#" class="mobile-drawer__nav-link">Camisolas</a></li>
+          <li class="mobile-drawer__nav-item"><a href="#" class="mobile-drawer__nav-link">Robes</a></li>
+          <li class="mobile-drawer__nav-item"><a href="#" class="mobile-drawer__nav-link">Pijamas</a></li>
+          <li class="mobile-drawer__nav-item"><a href="#" class="mobile-drawer__nav-link">Calcinhas</a></li>
+          <li class="mobile-drawer__nav-item"><a href="#" class="mobile-drawer__nav-link">Sobre nós</a></li>
+        </ul>
+      </nav>
+      <div class="mobile-drawer__footer">
+        <div class="mobile-drawer__social">
+          <a href="https://instagram.com/ladurrie" target="_blank" rel="noopener" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://tiktok.com/@ladurrie" target="_blank" rel="noopener" aria-label="TikTok"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.04a8.16 8.16 0 0 0 4.77 1.52V7.12a4.85 4.85 0 0 1-1-.43z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CART DRAWER ===== -->
+  <div class="cart-drawer" id="cartDrawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Carrinho de compras">
+    <div class="cart-drawer__overlay" id="cartOverlay"></div>
+    <div class="cart-drawer__panel">
+      <div class="cart-drawer__header">
+        <h2 class="cart-drawer__title">Carrinho</h2>
+        <button class="cart-drawer__close" id="cartClose" aria-label="Fechar carrinho"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="cart-drawer__body" id="cartBody">
+        <div class="cart-drawer__empty">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <p>Seu carrinho está vazio</p>
+          <a href="/" class="btn btn--primary" onclick="closeCart()">Continuar comprando</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== "MEDIDAS E DESCRIÇÃO" PANEL ===== -->
+  <div class="desc-panel" id="descPanel" role="dialog" aria-modal="true" aria-label="Medidas e Descrição">
+    <div class="desc-panel__overlay" id="descOverlay"></div>
+    <div class="desc-panel__drawer">
+      <button class="desc-panel__close" id="descClose" aria-label="Fechar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <p class="desc-panel__title">Medidas e Descrição</p>
+
+      <h3>Guia de Tamanhos</h3>
+      <table class="size-table">
+        <thead><tr><th>Tam.</th><th>Veste</th><th>Busto</th><th>Cintura</th><th>Quadril</th></tr></thead>
+        <tbody>
+          <tr><td>P</td><td>34–36</td><td>86–90 cm</td><td>66–70 cm</td><td>92–96 cm</td></tr>
+          <tr><td>M</td><td>38–40</td><td>90–94 cm</td><td>70–74 cm</td><td>96–100 cm</td></tr>
+          <tr><td>G</td><td>42</td><td>94–98 cm</td><td>74–78 cm</td><td>100–104 cm</td></tr>
+          <tr><td>GG</td><td>44</td><td>98–104 cm</td><td>78–84 cm</td><td>104–110 cm</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:.75rem;color:var(--color-fg-muted);margin-top:.5rem;line-height:1.6;">Em dúvida entre dois tamanhos, recomendamos o maior. Alças são reguláveis.</p>
+
+      <h3>Descrição</h3>
+      <p>A Mini Camisola Baby-Doll L'eau Rouge + Calcinha une delicadeza e sensualidade em uma peça de sleepwear de luxo. Com decote V profundo em renda, alças finas reguláveis e caimento leve e fluido, é a escolha perfeita para noites sofisticadas.</p>
+      <p>Acompanha calcinha de renda inclusa — modelagem delicada para completar o look.</p>
+      <p>Produzida artesanalmente no Brasil em malha premium de toque macio com detalhes em renda delicada.</p>
+
+      <h3>Composição</h3>
+      <ul>
+        <li>Tecido: 96% Poliéster, 4% Elastano</li>
+        <li>Renda: 90% Poliamida, 10% Elastano</li>
+        <li>Reguladores metálicos nas alças</li>
+        <li>Fabricado no Brasil</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== MAIN ===== -->
+  <main id="main-content">
+
+    <nav class="pdp-breadcrumb" aria-label="Localização">
+      <a href="/">Início</a>
+      <span class="pdp-breadcrumb__sep" aria-hidden="true">/</span>
+      <a href="#">Best Seller</a>
+      <span class="pdp-breadcrumb__sep" aria-hidden="true">/</span>
+      <span aria-current="page">Mini Camisola Baby-Doll L'eau Rouge + Calcinha</span>
+    </nav>
+
+    <div class="pdp-wrap">
+
+      <!-- ── GALLERY ── -->
+      <div class="pdp-gallery">
+        <div class="gallery-main-swiper swiper" id="galleryMain">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="https://cdn.dooca.store/161500/products/img-08-u5qut_800x1200+fill_ffffff.jpeg?v=1773592250"
+                alt="Mini Camisola Baby-Doll L'eau Rouge + Calcinha — frente"
+                loading="eager" fetchpriority="high" width="800" height="1200">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://cdn.dooca.store/161500/products/img-09-8huce_800x1200+fill_ffffff.jpeg?v=1773106264"
+                alt="Mini Camisola Baby-Doll L'eau Rouge + Calcinha — detalhe"
+                loading="lazy" width="800" height="1200">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://cdn.dooca.store/161500/products/img-04-qp74h_800x1200+fill_ffffff.jpeg?v=1773106266"
+                alt="Mini Camisola Baby-Doll L'eau Rouge + Calcinha — lateral"
+                loading="lazy" width="800" height="1200">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://cdn.dooca.store/161500/products/img-07-ehde6_800x1200+fill_ffffff.jpeg?v=1773106266"
+                alt="Mini Camisola Baby-Doll L'eau Rouge + Calcinha — costas"
+                loading="lazy" width="800" height="1200">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://cdn.dooca.store/161500/products/img-06-nwafn_800x1200+fill_ffffff.jpeg?v=1773106267"
+                alt="Mini Camisola Baby-Doll L'eau Rouge + Calcinha — conjunto"
+                loading="lazy" width="800" height="1200">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://cdn.dooca.store/161500/products/img-03-bjofn_800x1200+fill_ffffff.jpeg?v=1773106268"
+                alt="Mini Camisola Baby-Doll L'eau Rouge + Calcinha — detalhe renda"
+                loading="lazy" width="800" height="1200">
+            </div>
+          </div>
+          <div class="gallery-badge-sale" aria-hidden="true">-40%</div>
+        </div>
+
+        <div class="gallery-thumbs-strip swiper" id="galleryThumbs" aria-hidden="true">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://cdn.dooca.store/161500/products/img-08-u5qut_800x1200+fill_ffffff.jpeg?v=1773592250" alt="" loading="lazy" width="120" height="150"></div>
+            <div class="swiper-slide"><img src="https://cdn.dooca.store/161500/products/img-09-8huce_800x1200+fill_ffffff.jpeg?v=1773106264" alt="" loading="lazy" width="120" height="150"></div>
+            <div class="swiper-slide"><img src="https://cdn.dooca.store/161500/products/img-04-qp74h_800x1200+fill_ffffff.jpeg?v=1773106266" alt="" loading="lazy" width="120" height="150"></div>
+            <div class="swiper-slide"><img src="https://cdn.dooca.store/161500/products/img-07-ehde6_800x1200+fill_ffffff.jpeg?v=1773106266" alt="" loading="lazy" width="120" height="150"></div>
+            <div class="swiper-slide"><img src="https://cdn.dooca.store/161500/products/img-06-nwafn_800x1200+fill_ffffff.jpeg?v=1773106267" alt="" loading="lazy" width="120" height="150"></div>
+            <div class="swiper-slide"><img src="https://cdn.dooca.store/161500/products/img-03-bjofn_800x1200+fill_ffffff.jpeg?v=1773106268" alt="" loading="lazy" width="120" height="150"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── INFO ── -->
+      <div class="pdp-info">
+
+        <p class="pdp-brand">LADURRIE</p>
+        <h1 class="pdp-title">Mini Camisola Baby-Doll L'eau Rouge + Calcinha</h1>
+
+        <div style="background-color:#f1f4f6;border-radius:16px;font-size:12px;font-weight:600;color:#6d7a80;padding:5px 15px;display:inline-flex;align-items:center;gap:5px;margin:10px 0 10px 0;">
+          <span>+10% OFF NO <span style="color:#4CAF50;">PIX</span></span>
+        </div>
+
+        <div class="pdp-price-block">
+          <p class="pdp-price--compare">R$ 198,90</p>
+          <p class="pdp-price-main">R$ 119,80</p>
+          <div class="pdp-installment-row">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            3x de R$ 39,93 sem juros
+          </div>
+          <button class="pdp-more-payment" id="morePaymentBtn" aria-label="Ver mais formas de pagamento">Mais formas de pagamento</button>
+        </div>
+
+        <hr class="pdp-divider">
+
+        <div>
+          <p class="pdp-variant-label">Tamanho: <strong id="selectedSizeLabel">—</strong></p>
+          <div class="size-row" id="sizeRow" role="group" aria-label="Selecione o tamanho">
+            <button class="sz" data-size="P" aria-label="Tamanho P">P</button>
+            <button class="sz" data-size="M" aria-label="Tamanho M">M</button>
+            <button class="sz" data-size="G" aria-label="Tamanho G">G</button>
+            <button class="sz" data-size="GG" aria-label="Tamanho GG">GG</button>
+          </div>
+        </div>
+
+        <div>
+          <p class="pdp-variant-label" style="margin-bottom:.5rem;">Cor: <strong>L'eau Rouge</strong></p>
+          <div class="pdp-color-swatch" title="L'eau Rouge" aria-label="Cor selecionada: L'eau Rouge">
+            <img src="https://cdn.dooca.store/161500/products/img-08-u5qut_800x1200+fill_ffffff.jpeg?v=1773592250" alt="L'eau Rouge" loading="lazy" width="80" height="80">
+          </div>
+        </div>
+
+        <div class="qty-row" style="margin-top:1rem;">
+          <div class="qty-ctrl">
+            <button class="qty-btn" id="qtyMinus" aria-label="Diminuir quantidade">−</button>
+            <input class="qty-input" id="qtyInput" type="number" value="1" min="1" max="10" aria-label="Quantidade">
+            <button class="qty-btn" id="qtyPlus" aria-label="Aumentar quantidade">+</button>
+          </div>
+          <button class="btn-buy" id="btnBuy" aria-label="Comprar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            COMPRAR
+          </button>
+        </div>
+
+        <div class="pdp-wpp-link">
+          Ou se preferir
+          <a href="https://wa.me/5547997869754?text=Ol%C3%A1%2C+tenho+interesse+na+Mini+Camisola+Baby-Doll+L%27eau+Rouge+%2B+Calcinha." target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            Fale com uma consultora LADURRIE
+          </a>
+        </div>
+
+        <div class="pdp-shipping-strip">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 5v3h-7V8Z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          <div>
+            <strong>Frete Cortesia Grátis para todo o Brasil</strong>
+            <span>a partir de R$149,90</span>
+          </div>
+        </div>
+
+        <div class="pdp-accordion">
+
+          <div class="pdp-acc-item is-open">
+            <button class="pdp-acc-trigger" aria-expanded="true">
+              <svg class="acc-icon-left" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              Características
+              <span class="pdp-acc-plus" aria-hidden="true">+</span>
+            </button>
+            <div class="pdp-acc-body">
+              <div class="pdp-acc-inner">
+                <p>A Mini Camisola Baby-Doll L'eau Rouge + Calcinha é uma peça de sleepwear de luxo que une delicadeza e sensualidade. Com decote V em renda, alças reguláveis e malha de toque macio, é ideal para os momentos mais especiais.</p>
+                <ul>
+                  <li>Camisola Baby-Doll com decote V profundo em renda delicada</li>
+                  <li>Alças finas reguláveis com reguladores metálicos</li>
+                  <li>Sem bojo e sem aro — caimento leve e fluido</li>
+                  <li>Calcinha de renda inclusa — modelagem delicada</li>
+                  <li>Tecido: 96% Poliéster, 4% Elastano</li>
+                  <li>Renda: 90% Poliamida, 10% Elastano</li>
+                  <li>Produzido artesanalmente no Brasil</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="pdp-acc-item">
+            <button class="pdp-acc-trigger" aria-expanded="false">
+              <svg class="acc-icon-left" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg>
+              Cuidados com a peça
+              <span class="pdp-acc-plus" aria-hidden="true">+</span>
+            </button>
+            <div class="pdp-acc-body">
+              <div class="pdp-acc-inner">
+                <ul>
+                  <li>Lavar à mão ou ciclo delicado na máquina</li>
+                  <li>Temperatura máxima da água: 30°C</li>
+                  <li>Não usar alvejante ou água sanitária</li>
+                  <li>Pressionar suavemente — não torcer</li>
+                  <li>Secar na sombra, estendida horizontalmente</li>
+                  <li>Não usar secadora</li>
+                  <li>Passar a ferro em temperatura mínima, pelo avesso</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="pdp-acc-item">
+            <button class="pdp-acc-trigger" aria-expanded="false">
+              <svg class="acc-icon-left" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 5v3h-7V8Z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              Envio e Entrega
+              <span class="pdp-acc-plus" aria-hidden="true">+</span>
+            </button>
+            <div class="pdp-acc-body">
+              <div class="pdp-acc-inner">
+                <ul>
+                  <li>Frete Cortesia Grátis para todo o Brasil a partir de R$149,90</li>
+                  <li>Envio em até 3 dias úteis após confirmação do pagamento</li>
+                  <li>Prazo de entrega: 5 a 12 dias úteis</li>
+                  <li>Rastreio enviado por e-mail e WhatsApp</li>
+                  <li>Embalagem premium lacrada — ideal para presente</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="pdp-acc-item">
+            <button class="pdp-acc-trigger" aria-expanded="false">
+              <svg class="acc-icon-left" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+              Condições
+              <span class="pdp-acc-plus" aria-hidden="true">+</span>
+            </button>
+            <div class="pdp-acc-body">
+              <div class="pdp-acc-inner">
+                <ul>
+                  <li>Troca aceita em até 7 dias corridos após o recebimento</li>
+                  <li>Peça deve estar sem uso, com etiqueta e embalagem intactos</li>
+                  <li>Inicie a troca pelo WhatsApp ou e-mail</li>
+                  <li>Frete de devolução por conta da cliente</li>
+                  <li>Peças íntimas só aceitas com lacre de segurança intacto</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===== NEWSLETTER ===== -->
+    <section class="newsletter section section--dark" aria-label="Newsletter">
+      <div class="container">
+        <div class="newsletter__inner">
+          <div class="newsletter__content">
+            <h2 class="newsletter__heading">Entre no universo LADURRIE</h2>
+            <p class="newsletter__text">Receba novidades, lançamentos exclusivos e conteúdos sobre autocuidado.</p>
+          </div>
+          <form class="newsletter__form" id="newsletterForm" novalidate>
+            <div class="newsletter__field">
+              <label for="newsletterEmail" class="sr-only">Seu e-mail</label>
+              <input type="email" id="newsletterEmail" name="email" placeholder="Seu melhor e-mail" autocomplete="email" required aria-required="true">
+              <button type="submit" class="btn btn--white-outline">Quero receber</button>
+            </div>
+            <p class="newsletter__disclaimer">Ao se inscrever você concorda com nossa <a href="#">Política de Privacidade</a>.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+
+        <div class="footer__col footer__col--brand">
+          <a href="/" class="footer__logo" aria-label="LADURRIE — Página inicial">
+            <svg viewBox="0 0 300 50" aria-hidden="true" focusable="false" width="170">
+              <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle"
+                font-family="'Cormorant Garamond', Garamond, Georgia, serif"
+                font-weight="300" font-size="26" letter-spacing="10" fill="currentColor">LADURRIE</text>
+            </svg>
+          </a>
+          <p class="footer__tagline">Sleepwear e Underwear que vão além do vestir.<br>O autocuidado como ritual.</p>
+          <div class="footer__social">
+            <a href="https://instagram.com/ladurrie" target="_blank" rel="noopener" class="footer__social-link" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://tiktok.com/@ladurrie" target="_blank" rel="noopener" class="footer__social-link" aria-label="TikTok">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.04a8.16 8.16 0 0 0 4.77 1.52V7.12a4.85 4.85 0 0 1-1-.43z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <h3 class="footer__col-title">Informações</h3>
+          <ul class="footer__nav">
+            <li><a href="#">Sobre nós</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Cuidados com as peças</a></li>
+            <li><a href="#">Guia de tamanhos</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h3 class="footer__col-title">Atendimento</h3>
+          <ul class="footer__nav">
+            <li><a href="#">Fale conosco</a></li>
+            <li><a href="#">Trocas e devoluções</a></li>
+            <li><a href="#">Política de privacidade</a></li>
+            <li><a href="#">Termos de uso</a></li>
+            <li><a href="#">Rastreio de pedido</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h3 class="footer__col-title">Contato</h3>
+          <ul class="footer__nav footer__contact">
+            <li>
+              <a href="https://wa.me/5511999999999" target="_blank" rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+                WhatsApp
+              </a>
+            </li>
+            <li><a href="mailto:contato@ladurrie.com">contato@ladurrie.com</a></li>
+          </ul>
+          <div class="footer__payments" aria-label="Formas de pagamento aceitas">
+            <svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="pdx-american_express" viewBox="0 0 38 24" width="38" height="24"><title id="pdx-american_express">American Express</title><path fill="#000" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3Z" opacity=".07"/><path fill="#006FCF" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32Z"/><path fill="#FFF" d="M22.012 19.936v-8.421L37 11.528v2.326l-1.732 1.852L37 17.573v2.375h-2.766l-1.47-1.622-1.46 1.628-9.292-.02Z"/><path fill="#006FCF" d="M23.013 19.012v-6.57h5.572v1.513h-3.768v1.028h3.678v1.488h-3.678v1.01h3.768v1.531h-5.572Z"/><path fill="#006FCF" d="m28.557 19.012 3.083-3.289-3.083-3.282h2.386l1.884 2.083 1.89-2.082H37v.051l-3.017 3.23L37 18.92v.093h-2.307l-1.917-2.103-1.898 2.104h-2.321Z"/><path fill="#FFF" d="M22.71 4.04h3.614l1.269 2.881V4.04h4.46l.77 2.159.771-2.159H37v8.421H19l3.71-8.421Z"/><path fill="#006FCF" d="m23.395 4.955-2.916 6.566h2l.55-1.315h2.98l.55 1.315h2.05l-2.904-6.566h-2.31Zm.25 3.777.875-2.09.873 2.09h-1.748Z"/><path fill="#006FCF" d="M28.581 11.52V4.953l2.811.01L32.84 9l1.456-4.046H37v6.565l-1.74.016v-4.51l-1.644 4.494h-1.59L30.35 7.01v4.51h-1.768Z"/></svg>
+            <svg viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" role="img" width="38" height="24" aria-labelledby="pdx-diners_club"><title id="pdx-diners_club">Diners Club</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><path d="M12 12v3.7c0 .3-.2.3-.5.2-1.9-.8-3-3.3-2.3-5.4.4-1.1 1.2-2 2.3-2.4.4-.2.5-.1.5.2V12zm2 0V8.3c0-.3 0-.3.3-.2 2.1.8 3.2 3.3 2.4 5.4-.4 1.1-1.2 2-2.3 2.4-.4.2-.4.1-.4-.2V12zm7.2-7H13c3.8 0 6.8 3.1 6.8 7s-3 7-6.8 7h8.2c3.8 0 6.8-3.1 6.8-7s-3-7-6.8-7z" fill="#3086C8"/></svg>
+            <svg viewBox="0 0 38 24" width="38" height="24" role="img" aria-labelledby="pdx-discover" fill="none" xmlns="http://www.w3.org/2000/svg"><title id="pdx-discover">Discover</title><path fill="#000" opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32z" fill="#fff"/><path d="M3.57 7.16H2v5.5h1.57c.83 0 1.43-.2 1.96-.63.63-.52 1-1.3 1-2.11-.01-1.63-1.22-2.76-2.96-2.76zm1.26 4.14c-.34.3-.77.44-1.47.44h-.29V8.1h.29c.69 0 1.11.12 1.47.44.37.33.59.84.59 1.37 0 .53-.22 1.06-.59 1.39zm2.19-4.14h1.07v5.5H7.02v-5.5zm3.69 2.11c-.64-.24-.83-.4-.83-.69 0-.35.34-.61.8-.61.32 0 .59.13.86.45l.56-.73c-.46-.4-1.01-.61-1.62-.61-.97 0-1.72.68-1.72 1.58 0 .76.35 1.15 1.35 1.51.42.15.63.25.74.31.21.14.32.34.32.57 0 .45-.35.78-.83.78-.51 0-.92-.26-1.17-.73l-.69.67c.49.73 1.09 1.05 1.9 1.05 1.11 0 1.9-.74 1.9-1.81.02-.89-.35-1.29-1.57-1.74zm1.92.65c0 1.62 1.27 2.87 2.9 2.87.46 0 .86-.09 1.34-.32v-1.26c-.43.43-.81.6-1.29.6-1.08 0-1.85-.78-1.85-1.9 0-1.06.79-1.89 1.8-1.89.51 0 .9.18 1.34.62V7.38c-.47-.24-.86-.34-1.32-.34-1.61 0-2.92 1.28-2.92 2.88zm12.76.94l-1.47-3.7h-1.17l2.33 5.64h.58l2.37-5.64h-1.16l-1.48 3.7zm3.13 1.8h3.04v-.93h-1.97v-1.48h1.9v-.93h-1.9V8.1h1.97v-.94h-3.04v5.5zm7.29-3.87c0-1.03-.71-1.62-1.95-1.62h-1.59v5.5h1.07v-2.21h.14l1.48 2.21h1.32l-1.73-2.32c.81-.17 1.26-.72 1.26-1.56zm-2.16.91h-.31V8.03h.33c.67 0 1.03.28 1.03.82 0 .55-.36.85-1.05.85z" fill="#231F20"/><path d="M20.16 12.86a2.931 2.931 0 100-5.862 2.931 2.931 0 000 5.862z" fill="url(#pdx-paint0_linear)"/><path opacity=".65" d="M20.16 12.86a2.931 2.931 0 100-5.862 2.931 2.931 0 000 5.862z" fill="url(#pdx-paint1_linear)"/><path d="M36.57 7.506c0-.1-.07-.15-.18-.15h-.16v.48h.12v-.19l.14.19h.14l-.16-.2c.06-.01.1-.06.1-.13zm-.2.07h-.02v-.13h.02c.06 0 .09.02.09.06 0 .05-.03.07-.09.07z" fill="#231F20"/><path d="M36.41 7.176c-.23 0-.42.19-.42.42 0 .23.19.42.42.42.23 0 .42-.19.42-.42 0-.23-.19-.42-.42-.42zm0 .77c-.18 0-.34-.15-.34-.35 0-.19.15-.35.34-.35.18 0 .33.16.33.35 0 .19-.15.35-.33.35z" fill="#231F20"/><path d="M37 12.984S27.09 19.873 8.976 23h26.023a2 2 0 002-1.984l.024-3.02L37 12.985z" fill="#F48120"/><defs><linearGradient id="pdx-paint0_linear" x1="21.657" y1="12.275" x2="19.632" y2="9.104" gradientUnits="userSpaceOnUse"><stop stop-color="#F89F20"/><stop offset=".25" stop-color="#F79A20"/><stop offset=".533" stop-color="#F68D20"/><stop offset=".62" stop-color="#F58720"/><stop offset=".723" stop-color="#F48120"/><stop offset="1" stop-color="#F37521"/></linearGradient><linearGradient id="pdx-paint1_linear" x1="21.338" y1="12.232" x2="18.378" y2="6.446" gradientUnits="userSpaceOnUse"><stop stop-color="#F58720"/><stop offset=".359" stop-color="#E16F27"/><stop offset=".703" stop-color="#D4602C"/><stop offset=".982" stop-color="#D05B2E"/></linearGradient></defs></svg>
+            <svg role="img" aria-labelledby="pdx-elo" width="38" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 24"><title id="pdx-elo">Elo</title><g fill-rule="nonzero" fill="none"><path d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z" fill="#000" opacity=".07"/><path d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32" fill="#FFF"/><g><g><path fill="#003933" d="M 2.6796 11.08653 h 2.40758 c 0.43036 -2.27695 2.42382 -4.10657 4.96538 -4.10657 s 4.91666 2.04321 4.91666 5.12616 q 0.01218 0.38688 -0.06496 0.82615 h -7.77490 c 0.36540 1.40244 1.52656 2.22456 2.92320 2.22456 s 2.09090 -0.46345 2.80546 -1.26945 l 1.42912 1.30169 c -0.94598 1.07198 -2.35886 1.81350 -4.23458 1.81350 s -4.53502 -1.79738 -4.96538 -4.07433 h -2.40758 v -1.84574 Z M 12.9108 11.08653 c -0.10150 -0.57629 -0.36540 -1.10422 -0.74704 -1.48304 c -0.49938 -0.49569 -1.23018 -0.81003 -2.11120 -0.81003 s -1.59558 0.29822 -2.12754 0.82615 c -0.36540 0.36270 -0.66584 0.85839 -0.81606 1.46692 h 5.80184 Z M 16.41864 7.05047 h 2.09090 v 7.91492 h 3.78398 v 1.97873 h -3.75152 c -1.38040 0 -2.12736 -0.74152 -2.12736 -2.11176 v -7.78189 h 0 Z M 22.6954 11.98828 c 0 -2.68801 2.20864 -5.01372 5.13184 -5.01372 s 4.61622 1.81350 5.05066 4.10657 h 2.40758 v 1.84574 h -2.40758 c -0.44660 2.27695 -2.47466 4.07433 -5.05066 4.07433 c -2.93944 0 -5.13184 -2.30919 -5.13184 -5.01292 Z M 27.82724 15.05551 c 1.74580 0 3.04094 -1.31781 3.04094 -3.05111 s -1.32756 -3.08335 -3.04094 -3.08335 s -3.04094 1.31781 -3.04094 3.06723 c 0 1.69683 1.32756 3.06723 3.04094 3.06723 Z"/></g></g></g></svg>
+            <svg role="img" aria-labelledby="pdx-hypercard" viewBox="0 0 38 24" width="38" height="24" xmlns="http://www.w3.org/2000/svg"><title id="pdx-hypercard">Hypercard</title><g fill="none" fill-rule="evenodd"><path d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z" fill="#000" fill-rule="nonzero" opacity=".07"/><path d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32" fill="#FFF" fill-rule="nonzero"/><path d="M11.9 5.1H8.6c-1.4.1-2.6.6-2.9 1.8-.2.6-.3 1.3-.4 2-.7 3.3-1.3 6.7-2 9.9h25.4c2 0 3.3-.4 3.7-2 .2-.7.3-1.5.5-2.3.6-3.1 1.3-6.2 1.9-9.4H11.9z" fill="#B3131B" fill-rule="nonzero"/><path d="M6.38 9.31h.605v1.827h2.3V9.31h.605v4.421h-.605v-2.067h-2.3v2.067h-.604v-4.42zm4.364 1.213h.551v3.208h-.55v-3.208zm0-1.213h.551v.614h-.55V9.31zm3.36 3.74c.168-.212.252-.528.252-.95 0-.257-.037-.477-.111-.662-.14-.355-.398-.533-.77-.533-.376 0-.633.188-.771.563a2.23 2.23 0 00-.112.765c0 .248.037.46.112.635.14.333.397.5.77.5a.773.773 0 00.63-.318zm-2.032-2.527h.526v.428c.109-.147.227-.26.355-.34.183-.12.398-.181.644-.181.366 0 .676.14.93.42.255.28.383.68.383 1.2 0 .701-.184 1.203-.551 1.504a1.25 1.25 0 01-.813.286c-.242 0-.446-.053-.61-.16a1.408 1.408 0 01-.323-.31v1.646h-.541v-4.493zm5.477.074c.215.107.378.246.49.417.109.162.181.352.217.569.032.148.048.385.048.71h-2.362c.01.327.087.59.232.787.144.197.368.296.67.296.284 0 .51-.093.678-.28a.944.944 0 00.205-.376h.532c-.014.119-.06.25-.14.396a1.432 1.432 0 01-.266.357c-.165.16-.368.268-.61.325a1.873 1.873 0 01-.443.048c-.402 0-.742-.146-1.02-.438-.28-.292-.419-.7-.419-1.227 0-.517.14-.938.421-1.26.281-.324.648-.485 1.102-.485.229 0 .45.054.665.16zm.199 1.265a1.403 1.403 0 00-.154-.562c-.148-.261-.396-.392-.743-.392a.824.824 0 00-.626.27c-.169.18-.258.408-.268.684h1.79zm1.237-1.354h.514v.557c.042-.108.146-.24.31-.396a.804.804 0 01.62-.23l.124.012v.572a.81.81 0 00-.178-.015c-.273 0-.482.088-.629.263a.92.92 0 00-.22.607v1.853h-.541v-3.223zm4.166.172c.228.176.365.48.411.912h-.526a.972.972 0 00-.22-.495c-.115-.132-.298-.198-.55-.198-.346 0-.593.169-.741.506-.097.219-.145.489-.145.81 0 .323.068.594.205.815.136.22.351.331.644.331.225 0 .403-.068.534-.206.132-.137.222-.325.273-.564h.526c-.06.427-.21.74-.451.937-.241.198-.549.297-.924.297-.422 0-.758-.154-1.008-.462-.251-.308-.377-.693-.377-1.154 0-.566.138-1.007.413-1.322a1.332 1.332 0 011.05-.472c.363 0 .659.088.886.265zm1.54 2.564c.114.09.25.135.406.135.19 0 .375-.044.554-.132a.745.745 0 00.451-.72v-.436a.927.927 0 01-.256.106 2.18 2.18 0 01-.307.06l-.328.042a1.255 1.255 0 00-.442.123c-.167.095-.25.245-.25.452 0 .156.057.28.172.37zm1.14-1.466c.125-.016.208-.068.25-.156a.476.476 0 00.036-.208c0-.185-.065-.318-.197-.402-.131-.083-.32-.125-.564-.125-.283 0-.484.077-.602.23a.752.752 0 00-.13.375h-.505c.01-.397.139-.673.387-.829a1.59 1.59 0 01.862-.233c.38 0 .687.072.924.217.235.144.352.369.352.674v1.857c0 .056.012.101.035.135.023.034.071.051.146.051a.824.824 0 00.177-.018v.4c-.084.025-.148.04-.192.046a1.408 1.408 0 01-.181.009c-.187 0-.322-.067-.406-.199a.767.767 0 01-.094-.298c-.11.145-.269.27-.475.376a1.47 1.47 0 01-.683.16c-.3 0-.544-.091-.733-.273a.905.905 0 01-.285-.681c0-.3.094-.531.28-.695.187-.165.432-.266.735-.304l.863-.109zm1.716-1.27h.514v.557c.043-.108.146-.24.31-.396a.804.804 0 01.62-.23l.124.012v.572a.81.81 0 00-.178-.015c-.273 0-.482.088-.629.263a.92.92 0 00-.22.607v1.853h-.541v-3.223zm2.6 2.516c.147.233.381.35.704.35a.745.745 0 00.619-.324c.161-.216.242-.525.242-.929 0-.407-.083-.708-.25-.904a.78.78 0 00-.617-.294.814.814 0 00-.663.313c-.17.21-.255.516-.255.921 0 .345.074.634.22.867zm1.216-2.417c.096.06.206.166.328.316V9.295h.52v4.436h-.487v-.448a1.172 1.172 0 01-.448.43c-.173.089-.37.133-.593.133-.36 0-.67-.151-.933-.453-.263-.302-.394-.704-.394-1.206 0-.469.12-.876.36-1.22.239-.344.582-.516 1.027-.516.247 0 .453.052.62.156z" fill="#FFF"/></g></svg>
+            <svg viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" role="img" width="38" height="24" aria-labelledby="pdx-master"><title id="pdx-master">Mastercard</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><circle fill="#EB001B" cx="15" cy="12" r="7"/><circle fill="#F79E1B" cx="23" cy="12" r="7"/><path fill="#FF5F00" d="M22 12c0-2.4-1.2-4.5-3-5.7-1.8 1.3-3 3.4-3 5.7s1.2 4.5 3 5.7c1.8-1.2 3-3.3 3-5.7z"/></svg>
+            <svg viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" role="img" width="38" height="24" aria-labelledby="pdx-visa"><title id="pdx-visa">Visa</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><path d="M28.3 10.1H28c-.4 1-.7 1.5-1 3h1.9c-.3-1.5-.3-2.2-.6-3zm2.9 5.9h-1.7c-.1 0-.1 0-.2-.1l-.2-.9-.1-.2h-2.4c-.1 0-.2 0-.2.2l-.3.9c0 .1-.1.1-.1.1h-2.1l.2-.5L27 8.7c0-.5.3-.7.8-.7h1.5c.1 0 .2 0 .2.2l1.4 6.5c.1.4.2.7.2 1.1.1.1.1.1.1.2zm-13.4-.3l.4-1.8c.1 0 .2.1.2.1.7.3 1.4.5 2.1.4.2 0 .5-.1.7-.2.5-.2.5-.7.1-1.1-.2-.2-.5-.3-.8-.5-.4-.2-.8-.4-1.1-.7-1.2-1-.8-2.4-.1-3.1.6-.4.9-.8 1.7-.8 1.2 0 2.5 0 3.1.2h.1c-.1.6-.2 1.1-.4 1.7-.5-.2-1-.4-1.5-.4-.3 0-.6 0-.9.1-.2 0-.3.1-.4.2-.2.2-.2.5 0 .7l.5.4c.4.2.8.4 1.1.6.5.3 1 .8 1.1 1.4.2.9-.1 1.7-.9 2.3-.5.4-.7.6-1.4.6-1.4 0-2.5.1-3.4-.2-.1.2-.1.2-.2.1zm-3.5.3c.1-.7.1-.7.2-1 .5-2.2 1-4.5 1.4-6.7.1-.2.1-.3.3-.3H18c-.2 1.2-.4 2.1-.7 3.2-.3 1.5-.6 3-1 4.5 0 .2-.1.2-.3.2M5 8.2c0-.1.2-.2.3-.2h3.4c.5 0 .9.3 1 .8l.9 4.4c0 .1 0 .1.1.2 0-.1.1-.1.1-.1l2.1-5.1c-.1-.1 0-.2.1-.2h2.1c0 .1 0 .1-.1.2l-3.1 7.3c-.1.2-.1.3-.2.4-.1.1-.3 0-.5 0H9.7c-.1 0-.2 0-.2-.2L7.9 9.5c-.2-.2-.5-.5-.9-.6-.6-.3-1.7-.5-1.9-.5L5 8.2z" fill="#142688"/></svg>
+            <svg viewBox="0 0 38 24" width="38" height="24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pix"><rect width="38" height="24" rx="4" fill="#fff" stroke="#e0dbd8" stroke-width="1"/><g transform="translate(11,4) scale(0.333)"><path fill="#4db6ac" d="M11.9,12h-.68l8.04-8.04c2.62-2.61,6.86-2.61,9.48,0L36.78,12H36.1c-1.6,0-3.11,.62-4.24,1.76l-6.8,6.77c-.59,.59-1.53,.59-2.12,0l-6.8-6.77C15.01,12.62,13.5,12,11.9,12z"/><path fill="#4db6ac" d="M36.1,36h.68l-8.04,8.04c-2.62,2.61-6.86,2.61-9.48,0L11.22,36h.68c1.6,0,3.11-.62,4.24-1.76l6.8-6.77c.59-.59,1.53-.59,2.12,0l6.8,6.77C32.99,35.38,34.5,36,36.1,36z"/><path fill="#4db6ac" d="M44.04,28.74L38.78,34H36.1c-1.07,0-2.07-.42-2.83-1.17l-6.8-6.78c-1.36-1.36-3.58-1.36-4.94,0l-6.8,6.78C13.97,33.58,12.97,34,11.9,34H9.22l-5.26-5.26c-2.61-2.62-2.61-6.86,0-9.48L9.22,14h2.68c1.07,0,2.07,.42,2.83,1.17l6.8,6.78c.68,.68,1.58,1.02,2.47,1.02s1.79-.34,2.47-1.02l6.8-6.78C34.03,14.42,35.03,14,36.1,14h2.68l5.26,5.26C46.65,21.88,46.65,26.12,44.04,28.74z"/></g></svg>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2024 LADURRIE SLEEPWEAR. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== WHATSAPP FLOATING BUTTON ===== -->
+  <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C+vim+pelo+site+LADURRIE+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+    class="whatsapp-btn" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+    </svg>
+    <span class="whatsapp-btn__label">Fale conosco</span>
+  </a>
+
+  <button class="desc-tab" id="descTabBtn" aria-label="Abrir medidas e descrição">Medidas e Descrição</button>
+
+  <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo" hidden>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="../script.js"></script>
+  <script>
+    'use strict';
+
+    (function() {
+      if (!window.Swiper) return;
+      var thumbs = new Swiper('#galleryThumbs', {
+        slidesPerView: 5,
+        spaceBetween: 6,
+        watchSlidesProgress: true,
+        grabCursor: true,
+        a11y: false,
+      });
+      new Swiper('#galleryMain', {
+        loop: false,
+        speed: 360,
+        grabCursor: true,
+        keyboard: { enabled: true },
+        thumbs: { swiper: thumbs },
+        a11y: { prevSlideMessage: 'Imagem anterior', nextSlideMessage: 'Próxima imagem' },
+      });
+    })();
+
+    document.querySelectorAll('.pdp-acc-trigger').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = btn.closest('.pdp-acc-item');
+        var opening = !item.classList.contains('is-open');
+        document.querySelectorAll('.pdp-acc-item').forEach(function(i) {
+          i.classList.remove('is-open');
+          i.querySelector('.pdp-acc-trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (opening) {
+          item.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    var selectedSize = null;
+    var sizeLabel = document.getElementById('selectedSizeLabel');
+    document.querySelectorAll('.sz').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.sz').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        selectedSize = btn.dataset.size;
+        if (sizeLabel) sizeLabel.textContent = selectedSize;
+      });
+    });
+
+    var qtyInput = document.getElementById('qtyInput');
+    document.getElementById('qtyMinus') && document.getElementById('qtyMinus').addEventListener('click', function() {
+      var v = parseInt(qtyInput.value) || 1;
+      if (v > 1) qtyInput.value = v - 1;
+    });
+    document.getElementById('qtyPlus') && document.getElementById('qtyPlus').addEventListener('click', function() {
+      var v = parseInt(qtyInput.value) || 1;
+      if (v < 10) qtyInput.value = v + 1;
+    });
+
+    function doAddToCart() {
+      if (!selectedSize) {
+        var row = document.getElementById('sizeRow');
+        if (row) { row.classList.remove('shake'); void row.offsetWidth; row.classList.add('shake'); }
+        var lbl = document.querySelector('.pdp-variant-label');
+        if (lbl) { lbl.style.color = 'var(--color-red)'; setTimeout(function() { lbl.style.color = ''; }, 1200); }
+        return;
+      }
+      var qty = parseInt((qtyInput && qtyInput.value) || 1) || 1;
+      if (window.cart) {
+        for (var i = 0; i < qty; i++) {
+          cart.add({
+            id: 'mini-camisola-leau-rouge-' + selectedSize,
+            title: "Mini Camisola Baby-Doll L'eau Rouge + Calcinha",
+            size: selectedSize,
+            price: (function(){ var el = document.querySelector('.pdp-price-main'); if (!el) return 0; return parseFloat(el.textContent.replace(/[^0-9,]/g,'').replace(',','.')) || 0; })(),
+            image: (document.querySelector('#galleryMain .swiper-slide:first-child img') || {}).src || '',
+            color: (document.querySelector('[aria-label^=\"Cor selecionada\"]') || {}).title || '',
+            comparePrice: (function(){ var el = document.querySelector('.pdp-price--compare'); if (!el) return 0; return parseFloat(el.textContent.replace(/[^0-9,]/g,'').replace(',','.')) || 0; })(),
+          });
+        }
+      }
+    }
+    document.getElementById('btnBuy') && document.getElementById('btnBuy').addEventListener('click', doAddToCart);
+    document.getElementById('btnStickyBuy') && document.getElementById('btnStickyBuy').addEventListener('click', function() {
+      if (!selectedSize) {
+        var row = document.getElementById('sizeRow');
+        if (row) { row.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(function() { row.classList.remove('shake'); void row.offsetWidth; row.classList.add('shake'); }, 400); }
+        return;
+      }
+      doAddToCart();
+    });
+
+    (function() {
+      var panel = document.getElementById('descPanel');
+      var tabBtn = document.getElementById('descTabBtn');
+      var closeBtn = document.getElementById('descClose');
+      var overlay = document.getElementById('descOverlay');
+      if (!panel) return;
+      function open() { panel.classList.add('is-open'); document.body.classList.add('no-scroll'); closeBtn && closeBtn.focus(); }
+      function close() { panel.classList.remove('is-open'); document.body.classList.remove('no-scroll'); tabBtn && tabBtn.focus(); }
+      tabBtn && tabBtn.addEventListener('click', open);
+      closeBtn && closeBtn.addEventListener('click', close);
+      overlay && overlay.addEventListener('click', close);
+      panel.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
+    })();
+
+    var moreBtn = document.getElementById('morePaymentBtn');
+    moreBtn && moreBtn.addEventListener('click', function() {
+      var panel = document.getElementById('descPanel');
+      if (panel) { panel.classList.add('is-open'); document.body.classList.add('no-scroll'); }
+    });
+  </script>
+</body>
+</html>
