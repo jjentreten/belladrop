@@ -1,0 +1,29 @@
+# Dependências
+node_modules/
+
+# Variáveis de ambiente (NUNCA commitar)
+.env
+.env.local
+.env.*.local
+.env.production
+.env.production.local
+
+# Logs
+logs/
+*.log
+pm2.log
+
+# Runtime
+.pids/
+*.pid
+*.pid.lock
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

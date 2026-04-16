@@ -1338,7 +1338,7 @@
     /* ── Pagou config ──────────────────────────────────── */
     const PAGOU_ENV        = 'sandbox'; // change to 'production' for live
     const PAGOU_PUBLIC_KEY = 'pk_live_298wIyWN0s9J2fnxxvSKdlWJdQ94VmPtXfZEn2LdZac';
-    const PAGOU_API_BASE   = '/.netlify/functions';
+    const PAGOU_API_BASE   = '/api';
 
     let pagouElements = null;
     let pagouCardEl   = null;
@@ -1425,7 +1425,7 @@
 
       console.log('[UTMIFY DEBUG] Payload para UTMify:', JSON.stringify(payload, null, 2));
         
-        const res = await fetch('/.netlify/functions/notify-utmify', {
+        const res = await fetch('/api/notify-utmify', {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
           body:    JSON.stringify(payload),

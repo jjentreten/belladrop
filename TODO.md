@@ -1,28 +1,24 @@
-# Correção: Checkout não aplica desconto progressivo do carrinho
+# TODO - Migração Netlify → Node.js/Express + PM2/Nginx
 
-## ✅ Plano aprovado
-- [x] Identificar causa raiz (localStorage armazena preços brutos)
-- [x] Criar TODO.md com steps
+## ✅ Plano Aprovado
+- [x] Analisar funções Netlify
+- [x] Analisar frontend (checkout.html)
+- [x] Criar plano detalhado
+- [x] Usuário aprovou
 
-## ✅ Correção implementada
-- [x] 1. getDiscountRate() adicionado (15%/20% tiers)
-- [x] 2. subtotalRaw → discount → cartTotal calculados
-- [x] 3. resumeTotal mostra R$251,43 (exemplo)
-- [x] 4. PIX 10% sobre total já descontado
-- [x] 5. Parcelas baseadas em finalTotal
-- [x] 6. Pagou payloads com preços descontados
-- [x] 7. Logs de debug no console
+## 🔄 Implementação Backend (backend/)
+- [x] 1. Criar package.json + .env.example + .gitignore
+- [ ] 4. Criar routes/transactions.js (create + get)
+- [ ] 5. Criar routes/webhook.js (com dedup melhorado)
+- [ ] 6. Criar routes/utmify.js (token via env)
+- [ ] 7. Criar ecosystem.config.js (PM2)
 
-## 🧪 Testar
-- [ ] Checkout reflete desconto do carrinho
-- [ ] PIX/Card usam valores corretos  
-- [ ] Console mostra debug correto
+## 🔄 Ajustes Frontend
+- [ ] 8. Editar checkout.html (trocar URLs /api/)
 
-**Status:** ✅ Concluído | Aguardando teste
+## 🔄 Deploy VPS
+- [ ] 9. nginx.conf.example
+- [ ] 10. pm2-deploy.sh
+- [ ] 11. Teste local + attempt_completion
 
-## 🧪 Testar
-- [ ] Checkout reflete R$251,43 (exemplo)
-- [ ] PIX/card usam valor correto
-- [ ] UTMify recebe preços com desconto
-
-**Status:** Em progresso
+**Status:** Iniciando backend...

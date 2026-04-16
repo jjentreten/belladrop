@@ -1,0 +1,28 @@
+{
+  "name": "ladurrie-backend",
+  "version": "1.0.0",
+  "description": "Backend Node.js/Express para Ladurrie (ex-Netlify Functions)",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "pm2:start": "pm2 start ecosystem.config.js",
+    "pm2:stop": "pm2 stop ladurrie-backend",
+    "pm2:restart": "pm2 restart ladurrie-backend",
+    "pm2:logs": "pm2 logs ladurrie-backend"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.2.0",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
