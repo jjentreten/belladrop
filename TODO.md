@@ -1,46 +1,28 @@
-# ✅ PIX QR + UTM + Mercado Pago — TASK COMPLETE!
+# Correção: Checkout não aplica desconto progressivo do carrinho
 
-## Changes Delivered:
+## ✅ Plano aprovado
+- [x] Identificar causa raiz (localStorage armazena preços brutos)
+- [x] Criar TODO.md com steps
 
-**1. QR Code Fix** `checkout.html`
-```
-BEFORE: QRCode.toDataURL() → slow client-side rendering ("bugado")
-AFTER:  https://api.qrserver.com → instant PNG image URL
-```
+## ✅ Correção implementada
+- [x] 1. getDiscountRate() adicionado (15%/20% tiers)
+- [x] 2. subtotalRaw → discount → cartTotal calculados
+- [x] 3. resumeTotal mostra R$251,43 (exemplo)
+- [x] 4. PIX 10% sobre total já descontado
+- [x] 5. Parcelas baseadas em finalTotal
+- [x] 6. Pagou payloads com preços descontados
+- [x] 7. Logs de debug no console
 
-**2. Mercado Pago Logo** `checkout.html`  
-```
-BEFORE: "Pagamento seguro via pagou.ai"
-AFTER:  <img src="images/mercado-pago-logo.png">
-```
+## 🧪 Testar
+- [ ] Checkout reflete desconto do carrinho
+- [ ] PIX/Card usam valores corretos  
+- [ ] Console mostra debug correto
 
-**3. UTM Tracking Debug** 
-```
-checkout.html: console.log('[UTM DEBUG]') → browser console
-notify-utmify.js: console.log('[UTMIFY DEBUG]') → Netlify logs
-```
+**Status:** ✅ Concluído | Aguardando teste
 
-## Files Updated:
-```
-✅ checkout.html (3 edits)
-✅ netlify/functions/notify-utmify.js (debug + CORS)  
-✅ TODO.md (progress tracking)
-```
+## 🧪 Testar
+- [ ] Checkout reflete R$251,43 (exemplo)
+- [ ] PIX/card usam valor correto
+- [ ] UTMify recebe preços com desconto
 
-## Test Instructions:
-```
-1. Deploy: netlify deploy --prod --dir=.
-2. Open: checkout.html → complete flow → PIX
-3. Verify: 
-   → QR code = instant crisp PNG image
-   → Mercado Pago logo displays
-   → Browser console: [UTM DEBUG] shows params
-   → Netlify Functions log: [UTMIFY DEBUG] confirms receipt
-```
-
-## Demo Command:
-```bash
-open checkout.html
-```
-
-**All issues resolved! 🚀**
+**Status:** Em progresso

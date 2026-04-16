@@ -1310,15 +1310,28 @@
   <script>
     'use strict';
 
-    /* ── Cart from localStorage ──────────────────────────────── */
+    /* ── Cart from localStorage (with progressive discount) ───── */
     let cartItems = [];
     try {
       const saved = localStorage.getItem('bellario_cart');
       if (saved) cartItems = JSON.parse(saved) || [];
     } catch(e) { cartItems = []; }
 
-    const cartTotal = cartItems.reduce((s, i) => s + i.price * i.qty, 0);
     const cartCount = cartItems.reduce((s, i) => s + i.qty, 0);
+    
+    // 🐛 FIX: Apply same discount logic as cart drawer (script.js)
+    function getDiscountRate(subtotal) {
+      if (subtotal >= 299.90) return 0.20;
+      if (subtotal >= 199.90) return 0.15;
+      return 0;
+    }
+    
+    const subtotalRaw = cartItems.reduce((s, i) => s + i.price * i.qty, 0);
+    const discountRate = getDiscountRate(subtotalRaw);
+    const discountAmount = subtotalRaw * discountRate;
+    const cartTotal = subtotalRaw - discountAmount; // ✅ Final total with discount
+    
+    console.log(`[CHECKOUT DEBUG] Subtotal bruto: R$ ${subtotalRaw.toFixed(2)} | Desconto: ${discountRate*100}% (R$ ${discountAmount.toFixed(2)}) | TOTAL FINAL: R$ ${cartTotal.toFixed(2)}`);
 
     function fmt(n) { return 'R$ ' + n.toFixed(2).replace('.', ','); }
 
@@ -1395,22 +1408,22 @@
             priceInCents: Math.round((p.price || 0) * (paymentMethod === 'pix' ? 0.90 : 1) * 100),
           })),
           // ✅ SNAKE_CASE - formato esperado pela UTMify API
-          trackingParameters: {
-            utm_source:   utms.utm_source   || null,
-            utm_medium:   utms.utm_medium   || null,
-            utm_campaign: utms.utm_campaign || null,
-            utm_term:     utms.utm_term     || null,
-            utm_content:  utms.utm_content  || null,
-            src:          utms.src          || null,
-          },
-          commission: {
-            totalPriceInCents: Math.round(finalTotal * 100),
-            gatewayFeeInCents: 0,
-            userValueInCents:  Math.round(finalTotal * 100),
-          },
-        };
+        trackingParameters: {
+          utm_source:   utms.utm_source   || null,
+          utm_medium:   utms.utm_medium   || null,
+          utm_campaign: utms.utm_campaign || null,
+          utm_term:     utms.utm_term     || null,
+          utm_content:  utms.utm_content  || null,
+          src:          utms.src          || null,
+        },
+        commission: {
+          totalPriceInCents: Math.round(finalTotal * 100),
+          gatewayFeeInCents: 0,
+          userCommissionInCents: 0,
+        },
+      };
 
-        console.log('[UTMIFY DEBUG] Payload para UTMify:', JSON.stringify(payload, null, 2));
+      console.log('[UTMIFY DEBUG] Payload para UTMify:', JSON.stringify(payload, null, 2));
         
         const res = await fetch('/.netlify/functions/notify-utmify', {
           method:  'POST',
@@ -1443,7 +1456,7 @@
     const resumeTotalEl = document.getElementById('resumeTotal');
 
     resumeLabel.textContent  = `Resumo (${cartCount})`;
-    resumeTotalEl.textContent = fmt(cartTotal);
+    resumeTotalEl.textContent = fmt(cartTotal); // ✅ Now shows discounted total
 
     resumeToggle.addEventListener('click', () => {
       const open = resumeBody.classList.toggle('is-open');
@@ -1473,7 +1486,7 @@
     /* ── Progress bar ────────────────────────────────────────── */
     const progressMsg  = document.getElementById('resumeProgressMsg');
     const progressFill = document.getElementById('resumeProgressFill');
-    const sub = cartTotal;
+    const sub = subtotalRaw; // ✅ Use raw subtotal for progress bar (matches cart drawer)
     const tiers = [
       { v: 149.90, label: 'Frete Grátis' },
       { v: 199.90, label: '+15% OFF'     },
@@ -1723,9 +1736,10 @@
     /* ── Step 4 — Payment ────────────────────────────────── */
     function renderStep4() {
       const shipPrice  = getShipPrice();
-      const orderTotal = cartTotal + shipPrice;
+      const orderTotal = cartTotal + shipPrice; // ✅ Already discounted
       const pixValue   = orderTotal * 0.90;
       document.getElementById('pixValueDisplay').textContent = `Valor no Pix: ${fmt(pixValue)}`;
+      console.log(`[CHECKOUT DEBUG] Finalizar compra | Subtotal c/ desconto: R$ ${cartTotal.toFixed(2)} | Frete: R$ ${shipPrice.toFixed(2)} | PIX (10%OFF): R$ ${pixValue.toFixed(2)}`);
 
       // Generate stable order ref once per checkout session
       if (!ckOrderRef) {
@@ -1766,7 +1780,7 @@
     /* ── Build installment options ─────────────────────────── */
     function buildInstallments() {
       const shipPrice  = getShipPrice();
-      const orderTotal = cartTotal + shipPrice;
+      const orderTotal = cartTotal + shipPrice; // ✅ Discounted base
       const sel = document.getElementById('cardInstallments');
       sel.innerHTML = '';
       for (let n = 1; n <= 6; n++) {
@@ -1817,15 +1831,17 @@
         const amountCents = Math.round(orderTotal * 100);
         const buyer       = getBuyerInfo();
 
-        // Products + optional shipping line item (must sum to amountCents)
+        // 🐛 FIX: Products com preço já descontado (mesma lógica do carrinho)
         const cardProducts = cartItems.map(i => ({
           name:     i.title,
-          price:    Math.round(i.price * 100),
+          price:    Math.round((i.price * (1 - discountRate)) * 100), // ✅ Apply discount
           quantity: i.qty,
         }));
         if (shipPrice > 0) {
           cardProducts.push({ name: 'Frete', price: Math.round(shipPrice * 100), quantity: 1 });
         }
+        
+        console.log(`[PAGOU CARD] Products discounted:`, cardProducts);
 
         const result = await pagouElements.submit({
           createTransaction: async (tokenData) => {
@@ -1955,16 +1971,18 @@
       try {
         const shipPrice  = getShipPrice();
         const orderTotal = cartTotal + shipPrice;
-        const pixDiscount = 0.90; // 10% OFF no PIX
+        const pixDiscount = 0.90; // 10% OFF no PIX (sobre total já descontado)
         const pixCents    = Math.round(orderTotal * pixDiscount * 100);
         const buyer       = getBuyerInfo();
 
-        // products.price deve bater com amount — aplica o mesmo desconto PIX
+        // 🐛 FIX: Products com desconto progressivo + PIX
         const pixProducts = cartItems.map(i => ({
           name:     i.title,
-          price:    Math.round(i.price * pixDiscount * 100),
+          price:    Math.round((i.price * (1 - discountRate) * pixDiscount) * 100),
           quantity: i.qty,
         }));
+        
+        console.log(`[PAGOU PIX] Products com desconto progressivo+PIX:`, pixProducts);
 
         const res = await fetch(`${PAGOU_API_BASE}/create-transaction`, {
           method:  'POST',

@@ -2231,3 +2231,10 @@ body.no-scroll { overflow: hidden; }
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Hide WhatsApp buttons/links site-wide (per request) */
+.whatsapp-btn,
+.pdp-wpp-link,
+.footer__contact a[href^="https://wa.me/"] {
+  display: none !important;
+}
